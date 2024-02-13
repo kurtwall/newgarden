@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
-from garden.settings import BASE_DIR
-from .models import Bed, JournalEntry, Plant, Planting
+from .models import Bed, JournalEntry, Plant, Planting, Task
 
 
 class BedListView(ListView):
@@ -30,3 +29,13 @@ class PlantListView(ListView):
 class PlantDetailView(DetailView):
     model = Plant
     template_name = "plants/plant_detail.html"
+
+
+class JournalEntryListView(ListView):
+    model = JournalEntry
+    template_name = "plants/journalentry_list.html"
+
+
+class JournalEntryDetailView(DetailView):
+    model = JournalEntry
+    template_name = "plants/journalentry_detail.html"

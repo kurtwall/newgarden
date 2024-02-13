@@ -49,7 +49,7 @@ class Planting(models.Model):
     harvest_dt = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return f"B{self.bed}-R{self.row} {self.count} {self.plant.name}"
+        return f"Bed {self.bed}"
 
 
 class Task(models.Model):
@@ -68,13 +68,17 @@ class Task(models.Model):
 
 class JournalEntry(models.Model):
     class Meta:
-        ordering = ["date"]
+        ordering = ["-date"]
         verbose_name = "journal entry"
         verbose_name_plural = "journal entries"
 
-    date = models.DateField(blank=False, null=False)
+    date = models.DateTimeField(blank=False, null=False)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     entry = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.date}: {self.task}"
+        return f"{self.date}"
+
+    def get_queryset(self):
+        journalentry_list = JournalEntry.objects.order_by("date").filter(":5")
+        return journalentry_list

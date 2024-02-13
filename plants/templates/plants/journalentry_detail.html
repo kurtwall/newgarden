@@ -1,0 +1,11 @@
+<h1>Journal Entry</h1>
+
+<ul>
+    <li>{{ journalentry.date }}</li>
+    <li>{{ journalentry.task }}</li>
+    <li>{{ journalentry.entry }}</li>
+</ul>
+
+<div id="footer">
+    <p><a href="{% url 'journalentry_list' %}">All journal entries</a></p>
+</div>
