@@ -25,9 +25,11 @@ class Plant(models.Model):
     last_start_dt = models.DateField(null=False, blank=False, verbose_name="latest start date")
     first_plant_dt = models.DateField(null=False, blank=False, verbose_name="earliest plant date")
     last_plant_dt = models.DateField(null=False, blank=False, verbose_name="latest plant date")
+    date_added = models.DateField(auto_now_add=True, verbose_name="date added")
+    last_updated = models.DateField(auto_now=True, verbose_name="last updated")
 
     def __str__(self):
-        return f"{self.name}: {self.variety}"
+        return f"{self.name} {self.variety}"
 
 
 class Planting(models.Model):
@@ -35,12 +37,12 @@ class Planting(models.Model):
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
     row = models.IntegerField(blank=False, null=False)
     count = models.IntegerField(blank=False, null=False)
-    start_date = models.DateField(blank=False, null=False)
-    plant_date = models.DateField(blank=False, null=False)
-    harvest_date = models.DateField(blank=False, null=False)
+    start_dt = models.DateField(blank=False, null=False)
+    plant_dt = models.DateField(blank=False, null=False)
+    harvest_dt = models.DateField(blank=False, null=False)
 
     def __str__(self):
-        return f"{self.bed}: {self.count} {self.plant.name} {self.plant.variety}"
+        return f"B{self.bed}-R{self.row} {self.count} {self.plant.name}"
 
 
 class Task(models.Model):

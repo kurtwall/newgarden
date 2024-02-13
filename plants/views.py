@@ -1,16 +1,13 @@
-from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 from .models import Bed, JournalEntry, Plant, Planting
-
-
-def home(request):
-    beds = Bed.objects.all()
-    return render(request, "plants/home.html", context={"beds": beds})
 
 
 class BedListView(ListView):
     model = Bed
     template_name = "plants/bed_list.html"
+
+    def get_queryset(self):
+        return Bed.objects.all()
 
 
 class BedDetailView(DetailView):
@@ -21,6 +18,9 @@ class BedDetailView(DetailView):
 class PlantListView(ListView):
     model = Plant
     template_name = "plants/plant_list.html"
+
+    def get_queryset(self):
+        return Plant.objects.all()
 
 
 class PlantDetailView(DetailView):

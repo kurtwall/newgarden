@@ -23,7 +23,6 @@ from plants import views
 
 urlpatterns = (([
     path("admin/", admin.site.urls),
-    path("beds/", views.home, name="home"),
     path("", include('plants.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

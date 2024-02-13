@@ -1,1 +1,10 @@
-<h1>Bed {{ bed.bed }} Detail</h1>
+<h1>Bed {{ bed.bed }}</h1>
+
+<ul>
+    <li>Bed {{ bed.bed }}</li>
+    <li>Raised: {{ bed.is_raised }}</li>
+</ul>
+
+<div id="footer">
+    <p><a href="{% url 'bed_list' %}">Bed list</a></p>
+</div>

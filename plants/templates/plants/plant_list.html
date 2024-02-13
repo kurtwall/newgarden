@@ -1,1 +1,13 @@
 <h1>Plant List</h1>
+
+<ul>
+    {% for plant in plant_list %}
+        <li><a href="{% url 'plant_detail' plant.pk %}">{{ plant.name }} {{ plant.variety }}</a></li>
+    {% empty %}
+        <li>No plants have been started, yet.</li>
+    {% endfor %}
+</ul>
+
+<div id="footer">
+    <p><a href="{% url 'bed_list' %}">Bed list</a></p>
+</div>
