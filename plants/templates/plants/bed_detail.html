@@ -1,8 +1,12 @@
-<h1>Bed {{ bed.bed }}</h1>
+<h1>Bed {{ bed }}</h1>
 
 <ul>
-    <li>Bed {{ bed.bed }}</li>
-    <li>Raised: {{ bed.is_raised }}</li>
+    <li>Raised: {{ is_raised }}</li>
+    {% for planting in bed_detail %}
+            <li>Row {{ planting.row }}: {{ planting.count }} {{ planting.plant.name }} {{ planting.plant.variety }}</li>
+    {% empty %}
+        <li>No plantings have been created</li>
+    {% endfor %}
 </ul>
 
 <div id="footer">

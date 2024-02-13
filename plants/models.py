@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Bed(models.Model):
+    class Meta:
+        ordering = ["bed"]
+
     bed = models.IntegerField(blank=False, null=False, unique=True, verbose_name="bed number")
     is_raised = models.BooleanField(default=False, verbose_name="raised bed")
 
@@ -10,7 +13,6 @@ class Bed(models.Model):
 
 
 class Plant(models.Model):
-
     class Meta:
         ordering = ["name", "variety"]
 
@@ -29,15 +31,12 @@ class Plant(models.Model):
     last_start_dt = models.DateField(null=False, blank=False, verbose_name="latest start date")
     first_plant_dt = models.DateField(null=False, blank=False, verbose_name="earliest plant date")
     last_plant_dt = models.DateField(null=False, blank=False, verbose_name="latest plant date")
-    date_added = models.DateField(auto_now_add=True, verbose_name="date added")
-    last_updated = models.DateField(auto_now=True, verbose_name="last updated")
 
     def __str__(self):
         return f"{self.name} {self.variety}"
 
 
 class Planting(models.Model):
-
     class Meta:
         ordering = ["bed", "plant"]
 
@@ -46,19 +45,21 @@ class Planting(models.Model):
     row = models.IntegerField(blank=False, null=False)
     count = models.IntegerField(blank=False, null=False)
     start_dt = models.DateField(blank=False, null=False)
-    plant_dt = models.DateField(blank=False, null=False)
-    harvest_dt = models.DateField(blank=False, null=False)
+    plant_dt = models.DateField(blank=True, null=True)
+    harvest_dt = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return f"B{self.bed}-R{self.row} {self.count} {self.plant.name}"
 
 
 class Task(models.Model):
-    TASKS = [(0, "start"), (1, "plant"), (2, "weed"), (3, "water"), (4, "fertilize"), (5, "sucker"), (6, "deadhead"),
-             (7, "pot up"), (100, "other")]
-    FREQS = [("d", "daily"), ("w", "weekly"), ("m", "monthly"), ("y", "yearly")]
-    task = models.IntegerField(blank=False, null=False, choices=TASKS)
-    freq = models.CharField(max_length=1, blank=False, null=False, verbose_name="frequency", choices=FREQS)
+    class Meta:
+        ordering = ["task"]
+
+    FREQS = [("Daily", "Daily"), ("Weekly", "Weekly"), ("Monthly", "Monthly"), ("Yearly", "Yearly"),
+             ("Quarterly", "Quarterly"), ("Other", "Other")]
+    task = models.CharField(max_length=20, blank=False, null=False)
+    freq = models.CharField(max_length=20, blank=False, null=False, verbose_name="frequency", choices=FREQS)
     note = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
@@ -66,7 +67,12 @@ class Task(models.Model):
 
 
 class JournalEntry(models.Model):
-    date = models.DateField(blank=False, null=False, auto_now_add=True)
+    class Meta:
+        ordering = ["date"]
+        verbose_name = "journal entry"
+        verbose_name_plural = "journal entries"
+
+    date = models.DateField(blank=False, null=False)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     entry = models.TextField(blank=True, null=True)
 
