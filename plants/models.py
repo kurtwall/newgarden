@@ -10,6 +10,10 @@ class Bed(models.Model):
 
 
 class Plant(models.Model):
+
+    class Meta:
+        ordering = ["name", "variety"]
+
     name = models.CharField(max_length=250, null=False, blank=False)
     variety = models.CharField(max_length=250, null=False, blank=False)
     source = models.CharField(max_length=250, null=False, blank=False)
@@ -33,6 +37,10 @@ class Plant(models.Model):
 
 
 class Planting(models.Model):
+
+    class Meta:
+        ordering = ["bed", "plant"]
+
     bed = models.ForeignKey(Bed, on_delete=models.CASCADE)
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
     row = models.IntegerField(blank=False, null=False)
@@ -46,11 +54,12 @@ class Planting(models.Model):
 
 
 class Task(models.Model):
-    FREQS = [(0, "daily"), (1, "weekly"), (2, "monthly"), (3, "yearly")]
-    TASKS = [(0, "weed"), (1, "water"), (2, "fertilize"), (3, "start"), (4, "plant"), (5, "other")]
-    task = models.CharField(max_length=50, blank=False, null=False, choices=TASKS)
+    TASKS = [(0, "start"), (1, "plant"), (2, "weed"), (3, "water"), (4, "fertilize"), (5, "sucker"), (6, "deadhead"),
+             (7, "pot up"), (100, "other")]
+    FREQS = [("d", "daily"), ("w", "weekly"), ("m", "monthly"), ("y", "yearly")]
+    task = models.IntegerField(blank=False, null=False, choices=TASKS)
     freq = models.CharField(max_length=1, blank=False, null=False, verbose_name="frequency", choices=FREQS)
-    note = models.TextField(blank=True, null=True)
+    note = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
         return f"{self.task}"
@@ -59,7 +68,7 @@ class Task(models.Model):
 class JournalEntry(models.Model):
     date = models.DateField(blank=False, null=False, auto_now_add=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    entry = models.TextField(blank=False)
+    entry = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.date}: {self.task}"

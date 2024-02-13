@@ -1,7 +1,8 @@
 .idea/
 idea/
 __pycache__/
-db.sqlite3
 static/
 media/
-
+db.sqlite3
+garden.db
+.idea/inspectionProfiles/profiles_settings.xml

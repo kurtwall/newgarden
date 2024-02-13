@@ -6,9 +6,6 @@ class BedListView(ListView):
     model = Bed
     template_name = "plants/bed_list.html"
 
-    def get_queryset(self):
-        return Bed.objects.all()
-
 
 class BedDetailView(DetailView):
     model = Bed
@@ -18,9 +15,6 @@ class BedDetailView(DetailView):
 class PlantListView(ListView):
     model = Plant
     template_name = "plants/plant_list.html"
-
-    def get_queryset(self):
-        return Plant.objects.all()
 
 
 class PlantDetailView(DetailView):
