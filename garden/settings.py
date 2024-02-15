@@ -16,7 +16,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "plants.apps.PlantsConfig"
+    "plants.apps.PlantsConfig",
+    "recurrence",
 ]
 
 MIDDLEWARE = [

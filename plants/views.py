@@ -21,6 +21,16 @@ def bed_detail_view(request, bed):
 #     context_object_name = "bed_detail"
 
 
+class JournalEntryListView(ListView):
+    model = JournalEntry
+    template_name = "plants/journalentry_list.html"
+
+
+class JournalEntryDetailView(DetailView):
+    model = JournalEntry
+    template_name = "plants/journalentry_detail.html"
+
+
 class PlantListView(ListView):
     model = Plant
     template_name = "plants/plant_list.html"
@@ -31,11 +41,14 @@ class PlantDetailView(DetailView):
     template_name = "plants/plant_detail.html"
 
 
-class JournalEntryListView(ListView):
-    model = JournalEntry
-    template_name = "plants/journalentry_list.html"
+class TaskListView(ListView):
+    model = Task
+    template_name = "plants/task_list.html"
+
+    def get_queryset(self):
+        return Task.objects.all()
 
 
-class JournalEntryDetailView(DetailView):
-    model = JournalEntry
-    template_name = "plants/journalentry_detail.html"
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = "plants/task_detail.html"
