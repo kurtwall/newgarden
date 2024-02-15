@@ -39,3 +39,7 @@ class JournalEntryListView(ListView):
 class JournalEntryDetailView(DetailView):
     model = JournalEntry
     template_name = "plants/journalentry_detail.html"
+
+
+def index(request):
+    return render(request, "plants/index.html")

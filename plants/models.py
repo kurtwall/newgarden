@@ -1,4 +1,5 @@
 from django.db import models
+from recurrence.fields import RecurrenceField
 
 
 class Bed(models.Model):
@@ -56,10 +57,8 @@ class Task(models.Model):
     class Meta:
         ordering = ["task"]
 
-    FREQS = [("Daily", "Daily"), ("Weekly", "Weekly"), ("Monthly", "Monthly"), ("Yearly", "Yearly"),
-             ("Quarterly", "Quarterly"), ("Other", "Other")]
     task = models.CharField(max_length=20, blank=False, null=False)
-    freq = models.CharField(max_length=20, blank=False, null=False, verbose_name="frequency", choices=FREQS)
+    freq = RecurrenceField()
     note = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
