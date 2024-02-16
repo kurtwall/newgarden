@@ -1,0 +1,11 @@
+<h1>Task {{ task.task }}</h1>
+
+Details of task {{ task.pk }}
+
+{{ task.task }}
+{{ task.freq }}
+{{ task.note }}
+
+<div id="footer">
+    <p><a href="{% url 'task_list' %}">Task list</a></p>
+</div>

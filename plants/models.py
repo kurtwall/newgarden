@@ -1,5 +1,5 @@
 from django.db import models
-from recurrence.fields import RecurrenceField
+import recurrence.fields
 
 
 class Bed(models.Model):
@@ -11,6 +11,24 @@ class Bed(models.Model):
 
     def __str__(self):
         return f"{self.bed}"
+
+
+class JournalEntry(models.Model):
+    class Meta:
+        ordering = ["-date"]
+        verbose_name = "journal entry"
+        verbose_name_plural = "journal entries"
+
+    date = models.DateTimeField(blank=False, null=False)
+    task = models.ForeignKey("Task", on_delete=models.DO_NOTHING)
+    entry = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.date}"
+
+    def get_queryset(self):
+        journalentry_list = JournalEntry.objects.order_by("date").filter(":5")
+        return journalentry_list
 
 
 class Plant(models.Model):
@@ -41,8 +59,8 @@ class Planting(models.Model):
     class Meta:
         ordering = ["bed", "plant"]
 
-    bed = models.ForeignKey(Bed, on_delete=models.CASCADE)
-    plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
+    bed = models.ForeignKey("Bed", on_delete=models.CASCADE)
+    plant = models.ForeignKey("Plant", on_delete=models.CASCADE)
     row = models.IntegerField(blank=False, null=False)
     count = models.IntegerField(blank=False, null=False)
     start_dt = models.DateField(blank=False, null=False)
@@ -58,26 +76,8 @@ class Task(models.Model):
         ordering = ["task"]
 
     task = models.CharField(max_length=20, blank=False, null=False)
-    freq = RecurrenceField()
+    freq = recurrence.fields.RecurrenceField(blank=True, null=True)
     note = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
         return f"{self.task}"
-
-
-class JournalEntry(models.Model):
-    class Meta:
-        ordering = ["-date"]
-        verbose_name = "journal entry"
-        verbose_name_plural = "journal entries"
-
-    date = models.DateTimeField(blank=False, null=False)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    entry = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.date}"
-
-    def get_queryset(self):
-        journalentry_list = JournalEntry.objects.order_by("date").filter(":5")
-        return journalentry_list

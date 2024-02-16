@@ -10,4 +10,6 @@ urlpatterns = (([
     path("journal/<int:pk>/", views.JournalEntryDetailView.as_view(), name="journalentry_detail"),
     path("plants/", views.PlantListView.as_view(), name="plant_list"),
     path("plants/<int:pk>/", views.PlantDetailView.as_view(), name="plant_detail"),
+    path("tasks/", views.TaskListView.as_view(), name="task_list"),
+    path("tasks/<int:pk>/", views.TaskDetailView.as_view(), name="task_detail"),
 ]))
