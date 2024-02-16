@@ -1,3 +1,7 @@
+{% extends 'plants/base.html' %}
+
+{% block content %}
+
 <h1>{{ plant.name }}</h1>
 
 <ul>
@@ -16,6 +20,4 @@
 
 <img style="width: 50%; height: 50%;" alt="image of a {{ plant.name }}" src="{{ MEDIA_URL }}{{ plant.image }}">
 
-<div id="footer">
-    <p><a href="{% url 'plant_list' %}">Plant list</a></p>
-</div>
+{% endblock %}

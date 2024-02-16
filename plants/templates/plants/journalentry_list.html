@@ -1,14 +1,13 @@
-<h1>Journal</h1>
+{% extends 'plants/base.html' %}
 
-<ol>
+{% block content %}
+
+<ul>
     {% for entry in journalentry_list %}
         <li><a href="{% url 'journalentry_detail' entry.pk %}">{{ entry.date | date:"Y-m-d" }}</a></li>
     {% empty %}
         <li>No journal entries have been created, yet.</li>
     {% endfor %}
-</ol>
+</ul>
 
-<div id="footer">
-    <p><a href="{% url 'bed_list' %}">Bed list</a></p>
-    <p><a href="{% url 'plant_list' %}">Plant list</a></p>
-</div>
+{% endblock %}

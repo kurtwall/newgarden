@@ -1,14 +1,29 @@
-<h1>Bed List</h1>
+{% extends "plants/base.html" %}
+{% load static %}
 
-<ul>
-    {% for bed in bed_list %}
-        <li><a href="{% url 'bed_detail' bed.pk %}">Bed {{ bed.bed }}</a></li>
-    {% empty %}
-        <li>No beds have been started, yet.</li>
-    {% endfor %}
-</ul>
+{% block content %}
 
-<div id="footer">
-    <p><a href="{% url 'plant_list' %}">Plant list</a></p>
-    <p><a href="{% url 'journalentry_list' %}">Journal</a></p>
-</div>
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for bed in bed_list %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img class="card-img-top" width="100%" height="225" alt="blah"
+                                 src="{% static "plants/bed.jpeg" %}">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+{#                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

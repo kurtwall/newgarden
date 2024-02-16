@@ -1,3 +1,7 @@
+{% extends 'plants/base.html' %}
+
+{% block content %}
+
 <h1>Journal Entry</h1>
 
 <ul>
@@ -6,6 +10,4 @@
     <li>{{ journalentry.entry }}</li>
 </ul>
 
-<div id="footer">
-    <p><a href="{% url 'journalentry_list' %}">All journal entries</a></p>
-</div>
+{% endblock %}

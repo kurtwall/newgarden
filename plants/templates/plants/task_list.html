@@ -1,3 +1,6 @@
+{% extends 'plants/base.html' %}
+
+{% block content %}
 <h1>Task List</h1>
 
 <ul>
@@ -7,9 +10,4 @@
         <li>No task have been created, yet.</li>
     {% endfor %}
 </ul>
-
-<div id="footer">
-    <p><a href="{% url 'bed_list' %}">Bed list</a></p>
-    <p><a href="{% url 'plant_list' %}">Plant list</a></p>
-    <p><a href="{% url 'journalentry_list' %}">Journal</a></p>
-</div>
+{% endblock %}

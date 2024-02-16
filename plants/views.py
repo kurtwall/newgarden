@@ -21,6 +21,10 @@ def bed_detail_view(request, bed):
 #     context_object_name = "bed_detail"
 
 
+def index(request):
+    return render(request, 'plants/base.html')
+
+
 class JournalEntryListView(ListView):
     model = JournalEntry
     template_name = "plants/journalentry_list.html"

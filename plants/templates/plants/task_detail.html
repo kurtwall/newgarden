@@ -1,11 +1,11 @@
-<h1>Task {{ task.task }}</h1>
+{% extends 'plants/base.html' %}
 
-Details of task {{ task.pk }}
+{% block content %}
 
-{{ task.task }}
-{{ task.freq }}
-{{ task.note }}
+    <h1>{{ task.task }}</h1>
+<ul>
+    {{ task.freq }}
+    {{ task.note }}
+</ul>
 
-<div id="footer">
-    <p><a href="{% url 'task_list' %}">Task list</a></p>
-</div>
+{% endblock %}
