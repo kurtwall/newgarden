@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block footer %}
+    <div id="footer">
+        <p><a href="{% url 'bed_list' %}">Bed list</a></p>
+        <p><a href="{% url 'plant_list' %}">Plant list</a></p>
+        <p><a href="{% url 'journalentry_list' %}">Journal</a></p>
+    </div>
+{% endblock %}

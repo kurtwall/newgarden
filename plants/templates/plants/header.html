@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <title>Title</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-</head>
+{% extends "plants/base.html" %}
 
-<body>
-<main>
-
+{% block header %}
     <header class="p-3 text-bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -25,7 +11,7 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                     <li><a href="{% url 'bed_list' %}" class="nav-link px-2 text-white">Beds</a></li>
                     <li><a href="{% url 'plant_list' %}" class="nav-link px-2 text-white">Plants</a></li>
                     <li><a href="{% url 'task_list' %}" class="nav-link px-2 text-white">Tasks</a></li>
@@ -39,11 +25,4 @@
             </div>
         </div>
     </header>
-
-    {% block content %}
-        
-    {% endblock %}
-
-</main>
-</body>
-</html>
+{% endblock %}
