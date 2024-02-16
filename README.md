@@ -15,8 +15,9 @@ record events, notes, and activities about your garden in a journal.
 
 ## TODO (in no particular order)
 
+- [Scheduling/Reminders](https://django-recurrence.readthedocs.io/en/latest/index.html): Currently using django-recurrence
+- [General styling](https://getbootstrap.com)
+- Add CRUD views
 - [Add a few useful charts](git@github.com:RamezIssac/django-slick-reporting.git)
 - [Table styling](git@github.com:jieter/django-tables2.git)
-- [Scheduling/Reminders](https://django-recurrence.readthedocs.io/en/latest/index.html)
-- Add CRUD views
 - Switch to PostgreSQL?
