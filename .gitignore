@@ -6,3 +6,5 @@ media/
 db.sqlite3
 garden.db
 .idea/inspectionProfiles/profiles_settings.xml
+.DS_Store
+db.sqlite3.save
