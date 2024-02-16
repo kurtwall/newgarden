@@ -2,7 +2,7 @@
 
 <ul>
     {% for task in task_list %}
-        <li><a href="{% url 'task_detail' task.pk %}">Task {{ task.task }}</a></li>
+        <li><a href="{% url 'task_detail' task.pk %}">{{ task.task }}</a></li>
     {% empty %}
         <li>No task have been created, yet.</li>
     {% endfor %}
