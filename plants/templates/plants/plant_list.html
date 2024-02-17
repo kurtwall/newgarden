@@ -1,15 +1,21 @@
 {% extends 'plants/base.html' %}
+{% load static %}
 
 {% block content %}
 
-<h1>Plant List</h1>
-
-<ul>
-    {% for plant in plant_list %}
-        <li><a href="{% url 'plant_detail' plant.pk %}">{{ plant.name }} {{ plant.variety }}</a></li>
-    {% empty %}
-        <li>No plants have been started, yet.</li>
-    {% endfor %}
-</ul>
+    <div class="row row-cols-4 row-cols-md-6">
+        {% for plant in plant_list %}
+            <div class="col gx-3 gy-3">
+                <div class="card h-100">
+                    <a href="{% url 'plant_detail' plant.pk %}">
+                        <img style="width: 100%" src="{{ MEDIA_URL }}{{ plant.image }}" class="card-img-top" alt="blah"></a>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ plant.name }}</h5>
+                        <h6 class="card-subtitle text-center">{{ plant.variety }}</h6>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

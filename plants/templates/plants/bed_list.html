@@ -9,14 +9,12 @@
                 {% for bed in bed_list %}
                     <div class="col">
                         <div class="card shadow-sm">
-                            <img class="card-img-top" width="100%" height="225" alt="blah"
-                                 src="{% static "plants/bed.jpeg" %}">
+                            <a href="">
+                                <img class="card-img-top" width="100%" height="225" alt="blah"
+                                     src="{% static "plants/beds.jpg" %}"></a>
                             <div class="card-body">
+                                <h5 class="card-title">Bed {{ bed.bed }}</h5>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-{#                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
-                                    </div>
                                 </div>
                             </div>
                         </div>

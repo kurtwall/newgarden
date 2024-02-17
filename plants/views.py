@@ -22,7 +22,8 @@ def bed_detail_view(request, bed):
 
 
 def index(request):
-    return render(request, 'plants/base.html')
+    views = ["beds", "plants", "tasks", "journal"]
+    return render(request, 'plants/index.html', context={"views": views})
 
 
 class JournalEntryListView(ListView):

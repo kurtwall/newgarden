@@ -1,0 +1,34 @@
+{% extends "plants/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3">
+                {% for view in views %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <h2 class="card-header text-center">{{ view.title }}</h2>
+                            {# TODO: Fix this bletcherous hack #}
+                            {% if view.title|lower == "beds" %}
+                                <a href="{% url 'bed_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of a raised bed" src="{% static 'plants/beds.jpg' %}"></a>
+                            {% elif view.title|lower == "plants" %}
+                                <a href="{% url 'plant_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of various vegetables" src="{% static 'plants/vegetables.jpg' %}"></a>
+                            {% elif view.title|lower == "tasks" %}
+                                <a href="{% url 'task_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of gardening chores" src="{% static 'plants/tasks.jpg' %}"></a>
+                            {% elif view.title|lower == "journal" %}
+                                <a href="{% url 'journalentry_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of a gardening journal" src="{% static 'plants/journal.jpg' %}"></a>
+                            {% endif %}
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
