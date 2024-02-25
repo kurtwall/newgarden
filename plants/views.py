@@ -25,7 +25,6 @@ class BedDetailView(DetailView):
         return context
 
 
-
 def index(request):
     views = ["beds", "plants", "tasks", "journal"]
     return render(request, 'plants/index.html', context={"views": views})
