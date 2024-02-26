@@ -2,35 +2,6 @@ from django.db import models
 import recurrence.fields
 
 
-class Bed(models.Model):
-    class Meta:
-        ordering = ["bed"]
-
-    bed = models.IntegerField(blank=False, null=False, unique=True, verbose_name="bed number")
-    is_raised = models.BooleanField(default=False, verbose_name="raised bed")
-
-    def __str__(self):
-        return f"{self.bed}"
-
-
-class JournalEntry(models.Model):
-    class Meta:
-        ordering = ["-date"]
-        verbose_name = "journal entry"
-        verbose_name_plural = "journal entries"
-
-    date = models.DateTimeField(blank=False, null=False)
-    task = models.ForeignKey("Task", on_delete=models.DO_NOTHING)
-    entry = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.date}"
-
-    def get_queryset(self):
-        journalentry_list = JournalEntry.objects.order_by("date").filter(":5")
-        return journalentry_list
-
-
 class Plant(models.Model):
     class Meta:
         ordering = ["name", "variety"]
@@ -55,6 +26,28 @@ class Plant(models.Model):
         return f"{self.name} {self.variety}"
 
 
+class Bed(models.Model):
+    class Meta:
+        ordering = ["bed"]
+
+    CHOICES = [(1, "1"),
+               (2, "2"),
+               (3, "3"),
+               (4, "4"),
+               (5, "5"),
+               (6, "6"),
+               (7, "7"),
+               (8, "8"),
+               (9, "9"),
+               (0, "Starts")]
+
+    bed = models.SmallIntegerField(blank=False, null=False, verbose_name="bed number", choices=CHOICES)
+    is_raised = models.BooleanField(default=False, verbose_name="raised bed")
+
+    def __str__(self):
+        return f"{self.bed}"
+
+
 class Planting(models.Model):
     class Meta:
         ordering = ["bed", "plant"]
@@ -68,7 +61,25 @@ class Planting(models.Model):
     harvest_dt = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return f"Bed {self.bed}"
+        return f"{self.bed}"
+
+
+class JournalEntry(models.Model):
+    class Meta:
+        ordering = ["-date"]
+        verbose_name = "journal entry"
+        verbose_name_plural = "journal entries"
+
+    date = models.DateTimeField(blank=False, null=False)
+    task = models.ForeignKey("Task", on_delete=models.PROTECT)
+    entry = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.date}"
+
+    def get_queryset(self):
+        journalentry_list = JournalEntry.objects.order_by("date").filter(":5")
+        return journalentry_list
 
 
 class Task(models.Model):

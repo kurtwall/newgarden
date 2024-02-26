@@ -8,22 +8,21 @@ class BedListView(ListView):
     template_name = "plants/bed_list.html"
 
 
-# def bed_detail_view(request, bed):
-#     bed_detail = Planting.objects.filter(bed=bed)
-#     is_raised = Bed.objects.get(bed=bed).is_raised
-#     context = {'bed': bed, 'is_raised': is_raised, 'bed_detail': bed_detail}
-#     return render(request, "plants/bed_detail.html", context=context)
+def bed_detail_view(request, bed):
+    plantings = Planting.objects.filter(bed__bed=bed)
+    is_raised = Bed.objects.get(bed=bed).is_raised
+    context = {'bed': bed, 'is_raised': is_raised, 'plantings': plantings}
+    return render(request, "plants/bed_detail.html", context=context)
 
 
-class BedDetailView(DetailView):
-    model = Planting
-    template_name = "plants/bed_detail.html"
-    context_object_name = "bed_detail"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
+# class BedDetailView(DetailView):
+#     model = Planting
+#     template_name = "plants/bed_detail.html"
+#     context_object_name = "bed_detail"
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         return context
 
 
 def index(request):

@@ -3,13 +3,13 @@
 {% block content %}
 
     <h1>Bed {{ bed }}</h1>
+    <p>Raised: {{ is_raised }}</p>
     <ul>
-        <li>Raised: {{ is_raised }}</li>
-{#        {% for planting in bed_detail %}#}
+        {% for planting in plantings %}
             <li>Row {{ planting.row }}: {{ planting.count }} {{ planting.plant.name }} {{ planting.plant.variety }}</li>
-{#        {% empty %}#}
-{#            <li>No plantings have been created</li>#}
-{#        {% endfor %}#}
+        {% empty %}
+            <p>Nothing currently planted in this bed</p>
+        {% endfor %}
     </ul>
 
 {% endblock %}
