@@ -15,16 +15,6 @@ def bed_detail_view(request, bed):
     return render(request, "plants/bed_detail.html", context=context)
 
 
-# class BedDetailView(DetailView):
-#     model = Planting
-#     template_name = "plants/bed_detail.html"
-#     context_object_name = "bed_detail"
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
-
-
 def index(request):
     views = ["beds", "plants", "tasks", "journal"]
     return render(request, 'plants/index.html', context={"views": views})

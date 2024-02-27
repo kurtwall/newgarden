@@ -52,8 +52,8 @@ class Planting(models.Model):
     class Meta:
         ordering = ["bed", "plant"]
 
-    bed = models.ForeignKey("Bed", on_delete=models.CASCADE)
-    plant = models.ForeignKey("Plant", on_delete=models.CASCADE)
+    bed = models.ForeignKey("Bed", on_delete=models.PROTECT)
+    plant = models.ForeignKey("Plant", on_delete=models.PROTECT)
     row = models.IntegerField(blank=False, null=False)
     count = models.IntegerField(blank=False, null=False)
     start_dt = models.DateField(blank=False, null=False)

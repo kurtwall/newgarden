@@ -2,22 +2,22 @@
 
 {% block content %}
 
-<h1>{{ plant.name }}</h1>
-
-<ul>
-    <li>{{ plant.name }} {{ plant.variety }}</li>
-    <li>{{ plant.source }}</li>
-    <li>{{ plant.link }}</li>
-    <li>{{ plant.min_germ_days }}</li>
-    <li>{{ plant.max_germ_days }}</li>
-    <li>{{ plant.min_maturity_days }}</li>
-    <li>{{ plant.max_maturity_days }}</li>
-    <li>{{ plant.first_start_dt }}</li>
-    <li>{{ plant.last_start_dt }}</li>
-    <li>{{ plant.first_plant_dt }}</li>
-    <li>{{ plant.last_plant_dt }}</li>
-</ul>
-
-<img style="width: 50%; height: 50%;" alt="image of a {{ plant.name }}" src="{{ MEDIA_URL }}{{ plant.image }}">
+    <div id="container">
+        <h1>{{ plant.name }}</h1>
+        <ul>
+            <li>{{ plant.name }} {{ plant.variety }}</li>
+            <li>{{ plant.source }}</li>
+            <li>{{ plant.link }}</li>
+            <li>{{ plant.min_germ_days }}</li>
+            <li>{{ plant.max_germ_days }}</li>
+            <li>{{ plant.min_maturity_days }}</li>
+            <li>{{ plant.max_maturity_days }}</li>
+            <li>{{ plant.first_start_dt }}</li>
+            <li>{{ plant.last_start_dt }}</li>
+            <li>{{ plant.first_plant_dt }}</li>
+            <li>{{ plant.last_plant_dt }}</li>
+        </ul>
+        <img style="width: 50%; height: 50%;" alt="image of a {{ plant.name }}" src="{{ MEDIA_URL }}{{ plant.image }}">
+    </div>
 
 {% endblock %}

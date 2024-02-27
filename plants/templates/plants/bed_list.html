@@ -3,34 +3,31 @@
 
 {% block content %}
 
-    {% for bed in bed_list %}
-        <p><a href="{% url 'bed_detail' bed.bed %}">Bed {{ bed.get_bed_display }}</a></p>
-    {% endfor %}
-{#    <div class="container">#}
-{#        <div class="row border pt-3 pb-3 mt-3 mb-3">#}
-{#            <div class="col"><a href="{% url 'bed_detail' 1 %}">Starts</a></div>#}
-{#        </div>#}
-{#        <div class="row border">#}
-{#            <div class="col-9 border">#}
-{#                <a href="{% url 'bed_detail' 9 %}">Bed 9</a>#}
-{#                <div class="row border">#}
-{#                    <div class="col-3 border"></div>#}
-{#                    <div class="col-3 border"><a href="{% url 'bed_detail' 6 %}">Bed 5</a></div>#}
-{#                    <div class="col-3 border"><a href="{% url 'bed_detail' 7 %}">Bed 6</a></div>#}
-{#                    <div class="col-3 border"><a href="{% url 'bed_detail' 8 %}">Bed 7</a></div>#}
-{#                </div>#}
-{#                <div class="row border">#}
-{#                    <div class="col-3 border"></div>#}
-{#                    <div class="col-3 border"><a href="{% url 'bed_detail' 3 %}#">Bed 2</a></div>#}
-{#                    <div class="col-3 border"><a href="{% url 'bed_detail' 4 %}">Bed 3</a></div>#}
-{#                    <div class="col-3 border"><a href="{% url 'bed_detail' 5 %}">Bed 4</a></div>#}
-{#                </div>#}
-{#                <div class="row border">#}
-{#                    <div class="col-12 border"><a href="{% url 'bed_detail' 2 %}">Bed 1</a></div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-3 border"><a href="#">Bed 8</a></div>#}
-{#        </div>#}
-{#    </div>#}
+    <div class="container">
+        <div class="row row-cols-4 row-cols-md-4">
+            {% for bed in bed_list %}
+                <div class="col gx-3 gy-3">
+                    <div class="card h-100">
+                        <a href="{% url 'bed_detail' bed.bed %}"><img style="width: 100%" 
+                            {% if bed.bed == 0 %} 
+                                src="{% static 'plants/seed_starts.jpg' %}"
+                            {% elif bed.is_raised %} 
+                                src="{% static 'plants/raised_bed.jpg' %}"
+                            {% else %}
+                                src="{% static 'plants/trad_bed.jpg' %}"
+                            {% endif %}
+                            class="card-img-top" alt="blah"></a>
+                        <div class="card-body">
+                            {% if bed.bed == 0 %}
+                                <h5 class="card-title text-center">{{ bed.get_bed_display }}</h5>
+                            {% else %}
+                                <h5 class="card-title text-center">Bed {{ bed.get_bed_display }}</h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

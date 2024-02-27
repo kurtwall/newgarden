@@ -12,7 +12,7 @@
                             <h2 class="card-header text-center">{{ view.title }}</h2>
                             {# TODO: Fix this bletcherous hack #}
                             {% if view.title|lower == "beds" %}
-                                <a href="{% url 'bed_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of a raised bed" src="{% static 'plants/beds.jpg' %}"></a>
+                                <a href="{% url 'bed_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of a raised bed" src="{% static 'plants/raised_bed.jpg' %}"></a>
                             {% elif view.title|lower == "plants" %}
                                 <a href="{% url 'plant_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of various vegetables" src="{% static 'plants/vegetables.jpg' %}"></a>
                             {% elif view.title|lower == "tasks" %}

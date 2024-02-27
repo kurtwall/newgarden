@@ -2,14 +2,22 @@
 
 {% block content %}
 
-    <h1>Bed {{ bed }}</h1>
-    <p>Raised: {{ is_raised }}</p>
-    <ul>
-        {% for planting in plantings %}
-            <li>Row {{ planting.row }}: {{ planting.count }} {{ planting.plant.name }} {{ planting.plant.variety }}</li>
-        {% empty %}
-            <p>Nothing currently planted in this bed</p>
-        {% endfor %}
-    </ul>
+    <div id="container">
+        <h1>
+            {% if bed == "0" %}
+                Starts
+            {% else %}
+                Bed {{ bed }}
+            {% endif %}
+        </h1>
+        <p>Raised: {{ is_raised }}</p>
+        <ul>
+            {% for planting in plantings %}
+                <li>{{ planting.count }} {{ planting.plant.name }} {{ planting.plant.variety }}</li>
+            {% empty %}
+                <p>Nothing currently planted in this bed</p>
+            {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}

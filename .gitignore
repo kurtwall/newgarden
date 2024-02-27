@@ -1,7 +1,7 @@
 .idea/
 idea/
 __pycache__/
-static/
+# static/
 media/
 db.sqlite3
 garden.db
