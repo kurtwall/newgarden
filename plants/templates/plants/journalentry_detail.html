@@ -1,5 +1,15 @@
 {% extends 'plants/base.html' %}
 
+{% block header_status %}
+    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'index' %}" class="nav-link px-2 text-white">Home</a></li>
+        <li><a href="{% url 'bed_list' %}" class="nav-link px-2 text-white">Beds</a></li>
+        <li><a href="{% url 'plant_list' %}" class="nav-link px-2 text-white">Plants</a></li>
+        <li><a href="{% url 'task_list' %}" class="nav-link px-2 text-white">Tasks</a></li>
+        <li><a href="{% url 'journalentry_list' %}" class="nav-link px-2 text-white">Journal</a></li>
+    </ul>
+{% endblock %}
+
 {% block content %}
 
 <h1>Journal Entry</h1>

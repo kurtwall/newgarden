@@ -17,11 +17,19 @@ record events, notes, and activities about your garden in a journal.
 
 ## What is not working (in no particular order)
 
-- [Scheduling/Reminders](https://django-recurrence.readthedocs.io/en/latest/index.html): Currently using
-  django-recurrence
+- Switch to PostgreSQL?
+- [Scheduling/Reminders](https://django-recurrence.readthedocs.io/en/latest/index.html): Currently using django-recurrence
+- Create daily/weekly worklists
+- Create harvest date projections
+- Make a calendar of garden events and tasks
+- Add, edit, delete plants -- delete sets a deleted flag
+- Keep beds in the admin interface -- they change far less often
+- Support adding photos for journal entries, so need to relate journal notes to beds/plants
+- Show bed-related journal entries in the bed detail view, again noting the need to relate journal notes to beds/plants
+- Show plant-related journal entries in the plant detail view, again noting the need to relate journal notes to beds/plants
+- Support tags for searching journal entries
+- Relate journal entries to tasks, beds, plantsÅ
+- Ability to record actual harvest results for a given plant or planting
 - [General styling](https://getbootstrap.com)
-- Add CRUD views
 - [Add a few useful charts](git@github.com:RamezIssac/django-slick-reporting.git)
 - [Table styling](git@github.com:jieter/django-tables2.git)
-- Switch to PostgreSQL?
-- 
