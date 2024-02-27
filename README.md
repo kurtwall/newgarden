@@ -32,6 +32,7 @@ record events, notes, and activities about your garden in a journal.
 - Ability to record actual harvest results for a given plant or planting
 - Show plant thumbnails in bed detail view
 - Enable sorting the table columns in the bed detail view
+- Add get_absolute_url() to everything
 - [General styling](https://getbootstrap.com)
 - [Add a few useful charts](git@github.com:RamezIssac/django-slick-reporting.git)
 - [Table styling](git@github.com:jieter/django-tables2.git)

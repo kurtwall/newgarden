@@ -16,6 +16,7 @@
 {% block content %}
 
     <div id="container">
+    
         <h1>
             {% if bed == "0" %}
                 Starts
@@ -53,13 +54,7 @@
         {% else %}
             <p>Nothing currently planted in this bed</p>
         {% endif %}
-        {#        <ul>#}
-        {#            {% for planting in plantings %}#}
-        {#                <li>{{ planting.count }} {{ planting.plant.name }} {{ planting.plant.variety }}</li>#}
-        {#            {% empty %}#}
-        {#                <p>Nothing currently planted in this bed</p>#}
-        {#            {% endfor %}#}
-        {#        </ul>#}
+    
     </div>
 
 {% endblock %}

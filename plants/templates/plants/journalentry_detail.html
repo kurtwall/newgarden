@@ -12,12 +12,14 @@
 
 {% block content %}
 
-<h1>Journal Entry</h1>
+    <div class="container">
+        <h1>Journal Entry</h1>
 
-<ul>
-    <li>{{ journalentry.date }}</li>
-    <li>{{ journalentry.task }}</li>
-    <li>{{ journalentry.entry }}</li>
-</ul>
+        <ul>
+            <li>{{ journalentry.date }}</li>
+            <li>{{ journalentry.task }}</li>
+            <li>{{ journalentry.entry }}</li>
+        </ul>
+    </div>
 
 {% endblock %}

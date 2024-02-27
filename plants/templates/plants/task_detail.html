@@ -12,10 +12,12 @@
 
 {% block content %}
 
-    <h1>{{ task.task }}</h1>
-<ul>
-    {{ task.freq }}
-    {{ task.note }}
-</ul>
+    <div class="container">
+        <h1>{{ task.task }}</h1>
+        <ul>
+            {{ task.freq }}
+            {{ task.note }}
+        </ul>
+    </div>
 
 {% endblock %}

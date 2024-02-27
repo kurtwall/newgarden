@@ -12,13 +12,17 @@
 {% endblock %}
 
 {% block content %}
-<h1>Task List</h1>
 
-<ul>
-    {% for task in task_list %}
-        <li><a href="{% url 'task_detail' task.pk %}">{{ task.task }}</a></li>
-    {% empty %}
-        <li>No task have been created, yet.</li>
-    {% endfor %}
-</ul>
+    <div class="container">
+        <h1>Task List</h1>
+
+        <ul>
+            {% for task in task_list %}
+                <li><a href="{% url 'task_detail' task.pk %}">{{ task.task }}</a></li>
+            {% empty %}
+                <li>No task have been created, yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
 {% endblock %}
