@@ -13,21 +13,48 @@
 {% block content %}
 
     <div id="container">
-        <h1>{{ plant.name }}</h1>
-        <ul>
-            <li>{{ plant.name }} {{ plant.variety }}</li>
-            <li>{{ plant.source }}</li>
-            <li>{{ plant.link }}</li>
-            <li>{{ plant.min_germ_days }}</li>
-            <li>{{ plant.max_germ_days }}</li>
-            <li>{{ plant.min_maturity_days }}</li>
-            <li>{{ plant.max_maturity_days }}</li>
-            <li>{{ plant.first_start_dt }}</li>
-            <li>{{ plant.last_start_dt }}</li>
-            <li>{{ plant.first_plant_dt }}</li>
-            <li>{{ plant.last_plant_dt }}</li>
-        </ul>
-        <img style="width: 50%; height: 50%;" alt="image of a {{ plant.name }}" src="{{ MEDIA_URL }}{{ plant.image }}">
-    </div>
+        <h1 class="text-center">{{ plant.name }}</h1>
+
+        <div class="row">
+            <div class="col-6">
+                <table class="table">
+                    <thead></thead>
+                    <tbody>
+                        <tr><td>Variety</td><td>{{ plant.variety }}</td></tr>
+                        <tr><td>Source</td><td>{{ plant.source }}</td></tr>
+                        <tr><td>Link</td><td>{{ plant.link | urlize }}</td></tr>
+                        <tr><td>Min days to germinate</td><td>{{ plant.min_germ_days }}</td></tr>
+                        <tr><td>Max days to germinate</td><td>{{ plant.max_germ_days }}</td></tr>
+                        <tr><td>Min days to maturity</td><td>{{ plant.min_maturity_days }}</td></tr>
+                        <tr><td>Max days to maturity</td><td>{{ plant.max_maturity_days }}</td></tr>
+                        <tr><td>First start date</td><td>{{ plant.first_start_dt }}</td></tr>
+                        <tr><td>Last start date</td><td>{{ plant.last_start_dt }}</td></tr>
+                        <tr><td>First plant date</td><td>{{ plant.first_plant_dt }}</td></tr>
+                        <tr><td>Last plant date</td><td>{{ plant.last_plant_dt }}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+{#        <div class="row">#}
+{#            <div class="col-6">#}
+{#                <ul>#}
+{#                    <li>{{ plant.variety }}</li>#}
+{#                    <li>{{ plant.source }}</li>#}
+{#                    <li>{{ plant.link | urlize }}</li>#}
+{#                    <li>{{ plant.min_germ_days }}</li>#}
+{#                    <li>{{ plant.max_germ_days }}</li>#}
+{#                    <li>{{ plant.min_maturity_days }}</li>#}
+{#                    <li>{{ plant.max_maturity_days }}</li>#}
+{#                    <li>{{ plant.first_start_dt }}</li>#}
+{#                    <li>{{ plant.last_start_dt }}</li>#}
+{#                    <li>{{ plant.first_plant_dt }}</li>#}
+{#                    <li>{{ plant.last_plant_dt }}</li>#}
+{#                </ul>#}
+{#            </div>#}
+                <div class="col-6">
+                    <img class="img img-thumbnail" alt="image of a {{ plant.name }}"
+                         src="{{ MEDIA_URL }}{{ plant.image }}">
+                </div>
+            </div>
+        </div>
 
 {% endblock %}

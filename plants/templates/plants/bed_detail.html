@@ -1,6 +1,8 @@
 {% extends "plants/base.html" %}
+{% load static %}
 
 {% block header_status %}
+
     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="{% url 'index' %}" class="nav-link px-2 text-white">Home</a></li>
         <li><a href="{% url 'bed_list' %}" class="nav-link px-2 text-white">Beds</a></li>
@@ -8,6 +10,7 @@
         <li><a href="{% url 'task_list' %}" class="nav-link px-2 text-white">Tasks</a></li>
         <li><a href="{% url 'journalentry_list' %}" class="nav-link px-2 text-white">Journal</a></li>
     </ul>
+
 {% endblock %}
 
 {% block content %}
@@ -17,17 +20,46 @@
             {% if bed == "0" %}
                 Starts
             {% else %}
-                Bed {{ bed }}
+                Bed {{ bed }} {% if is_raised %} (raised) {% else %} (not raised) {% endif %}
             {% endif %}
         </h1>
-        <p>Raised: {{ is_raised }}</p>
-        <ul>
-            {% for planting in plantings %}
-                <li>{{ planting.count }} {{ planting.plant.name }} {{ planting.plant.variety }}</li>
-            {% empty %}
-                <p>Nothing currently planted in this bed</p>
-            {% endfor %}
-        </ul>
+        {% if plantings.count > 0 %}
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Count</th>
+                    <th>Plant</th>
+                    <th>Variety</th>
+                    <th>Date Started</th>
+                    <th>Date Planted</th>
+                    <th>Date Harvested</th>
+                    <th>Thumbnail</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for planting in plantings %}
+                    <tr>
+                        <td>{{ planting.count }}</td>
+                        <td>{{ planting.plant.name }}</td>
+                        <td><a href="{% url 'plant_detail' planting.plant.pk %}">{{ planting.plant.variety }}</a></td>
+                        <td>{{ planting.start_dt }}</td>
+                        <td>{{ planting.plant_dt }}</td>
+                        <td>{{ planting.harvest_dt }}</td>
+                        <td><img src="{{ planting.plant.image.thumbnail.100x100 }}" alt="thumbnail image of {{ planting.plant.name }}"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Nothing currently planted in this bed</p>
+        {% endif %}
+        {#        <ul>#}
+        {#            {% for planting in plantings %}#}
+        {#                <li>{{ planting.count }} {{ planting.plant.name }} {{ planting.plant.variety }}</li>#}
+        {#            {% empty %}#}
+        {#                <p>Nothing currently planted in this bed</p>#}
+        {#            {% endfor %}#}
+        {#        </ul>#}
     </div>
 
 {% endblock %}

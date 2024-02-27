@@ -1,5 +1,6 @@
 from django.db import models
 import recurrence.fields
+from versatileimagefield.fields import VersatileImageField
 
 
 class Plant(models.Model):
@@ -10,7 +11,7 @@ class Plant(models.Model):
     variety = models.CharField(max_length=250, null=False, blank=False)
     source = models.CharField(max_length=250, null=False, blank=False)
     link = models.URLField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, width_field="img_width", height_field="img_height")
+    image = VersatileImageField(blank=True, null=True, width_field="img_width", height_field="img_height")
     img_width = models.IntegerField(blank=True, null=True, verbose_name="image width")
     img_height = models.IntegerField(blank=True, null=True, verbose_name="image height")
     min_germ_days = models.IntegerField(null=False, blank=False, verbose_name="minimum days to germinate")
