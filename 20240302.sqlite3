@@ -1261,6 +1261,110 @@
     }
 },
 {
+    "model": "admin.logentry",
+    "pk": 98,
+    "fields": {
+        "action_time": "2024-02-27T02:39:46.922Z",
+        "user": 1,
+        "content_type": 11,
+        "object_id": "5",
+        "object_repr": "2024-02-27 02:38:30+00:00",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 99,
+    "fields": {
+        "action_time": "2024-02-27T07:26:26.140Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "3",
+        "object_repr": "1",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Raised bed\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 100,
+    "fields": {
+        "action_time": "2024-02-27T07:27:12.774Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "9",
+        "object_repr": "7",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Raised bed\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 101,
+    "fields": {
+        "action_time": "2024-03-01T06:35:33.429Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "7",
+        "object_repr": "Deadhead",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Freq\", \"Note\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 102,
+    "fields": {
+        "action_time": "2024-03-01T06:38:06.292Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "10",
+        "object_repr": "Pest check",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 103,
+    "fields": {
+        "action_time": "2024-03-01T06:38:38.346Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "4",
+        "object_repr": "Water",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Freq\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 104,
+    "fields": {
+        "action_time": "2024-03-01T07:41:53.357Z",
+        "user": 1,
+        "content_type": 22,
+        "object_id": "1",
+        "object_repr": "Course object (1)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 105,
+    "fields": {
+        "action_time": "2024-03-01T07:42:45.079Z",
+        "user": 1,
+        "content_type": 22,
+        "object_id": "2",
+        "object_repr": "Course object (2)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -2017,11 +2121,83 @@
     }
 },
 {
+    "model": "auth.permission",
+    "pk": 85,
+    "fields": {
+        "name": "Can add course",
+        "content_type": 22,
+        "codename": "add_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 86,
+    "fields": {
+        "name": "Can change course",
+        "content_type": 22,
+        "codename": "change_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 87,
+    "fields": {
+        "name": "Can delete course",
+        "content_type": 22,
+        "codename": "delete_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 88,
+    "fields": {
+        "name": "Can view course",
+        "content_type": 22,
+        "codename": "view_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 89,
+    "fields": {
+        "name": "Can add events",
+        "content_type": 23,
+        "codename": "add_events"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 90,
+    "fields": {
+        "name": "Can change events",
+        "content_type": 23,
+        "codename": "change_events"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 91,
+    "fields": {
+        "name": "Can delete events",
+        "content_type": 23,
+        "codename": "delete_events"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 92,
+    "fields": {
+        "name": "Can view events",
+        "content_type": 23,
+        "codename": "view_events"
+    }
+},
+{
     "model": "auth.user",
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$720000$Yhsby1CGqAlMGtHmbk4ONH$HYWc4c2IGv2rnBM4kCRP+YLkAE+ba6i7dEI3gHwArkU=",
-        "last_login": "2024-02-16T00:27:28.900Z",
+        "last_login": "2024-03-01T06:02:09.962Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -2203,11 +2379,35 @@
     }
 },
 {
+    "model": "contenttypes.contenttype",
+    "pk": 22,
+    "fields": {
+        "app_label": "plants",
+        "model": "course"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 23,
+    "fields": {
+        "app_label": "plants",
+        "model": "events"
+    }
+},
+{
     "model": "sessions.session",
     "pk": "c9oe62eh45s15ws4qve6umaxberqam43",
     "fields": {
         "session_data": ".eJxVjMEOwiAQRP-FsyFAadl69N5vIHR3kaqBpLQn479Lkx709jIzb97Ch31Lfq-8-oXEVWhx-c3mgE_OR0GPkO9FYsnbuszymMizrXIqxK_buf07SKGmZruBAENHrEAxGm0NadUDOFa2EWjUg-sNUkOIBkd2ndUqqti00ZD4fAHKjzc2:1ram4e:AZ-sCC3Xeju10FNXBRLE10BycdSsz72Xh90HGIlmfEo",
         "expire_date": "2024-03-01T00:27:28.901Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "h6ifzufiq3csl73eqqgmatwwg1cfhhos",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQRP-FsyFAadl69N5vIHR3kaqBpLQn479Lkx709jIzb97Ch31Lfq-8-oXEVWhx-c3mgE_OR0GPkO9FYsnbuszymMizrXIqxK_buf07SKGmZruBAENHrEAxGm0NadUDOFa2EWjUg-sNUkOIBkd2ndUqqti00ZD4fAHKjzc2:1rfvyD:iwwfkmtQ4sWzVCwYHeYY0nkP20byH-cEcnMMXS8ojpQ",
+        "expire_date": "2024-03-15T06:02:09.962Z"
     }
 },
 {
@@ -2937,6 +3137,9 @@
     "pk": 1,
     "fields": {
         "bed": 0,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": false
     }
 },
@@ -2945,7 +3148,10 @@
     "pk": 3,
     "fields": {
         "bed": 1,
-        "is_raised": true
+        "image": "",
+        "img_width": null,
+        "img_height": null,
+        "is_raised": false
     }
 },
 {
@@ -2953,6 +3159,9 @@
     "pk": 4,
     "fields": {
         "bed": 2,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": true
     }
 },
@@ -2961,6 +3170,9 @@
     "pk": 5,
     "fields": {
         "bed": 3,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": true
     }
 },
@@ -2969,6 +3181,9 @@
     "pk": 6,
     "fields": {
         "bed": 4,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": true
     }
 },
@@ -2977,6 +3192,9 @@
     "pk": 7,
     "fields": {
         "bed": 5,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": true
     }
 },
@@ -2985,6 +3203,9 @@
     "pk": 8,
     "fields": {
         "bed": 6,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": true
     }
 },
@@ -2993,7 +3214,10 @@
     "pk": 9,
     "fields": {
         "bed": 7,
-        "is_raised": false
+        "image": "",
+        "img_width": null,
+        "img_height": null,
+        "is_raised": true
     }
 },
 {
@@ -3001,6 +3225,9 @@
     "pk": 10,
     "fields": {
         "bed": 8,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": false
     }
 },
@@ -3009,6 +3236,9 @@
     "pk": 11,
     "fields": {
         "bed": 9,
+        "image": "",
+        "img_width": null,
+        "img_height": null,
         "is_raised": false
     }
 },
@@ -3265,7 +3495,10 @@
     "fields": {
         "date": "2024-01-28T16:21:52Z",
         "task": 1,
-        "entry": "Started broccoli, cauliflower, tomatoes, basil, chili peppers, bell peppers, shallots, scallions, leeks."
+        "bed": null,
+        "note": "Started broccoli, cauliflower, tomatoes, basil, chili peppers, bell peppers, shallots, scallions, leeks.",
+        "image": "",
+        "image_desc": null
     }
 },
 {
@@ -3274,7 +3507,10 @@
     "fields": {
         "date": "2024-02-01T17:16:34Z",
         "task": 1,
-        "entry": "Started cantaloupe, cucumber"
+        "bed": null,
+        "note": "Started cantaloupe, cucumber",
+        "image": "",
+        "image_desc": null
     }
 },
 {
@@ -3283,7 +3519,10 @@
     "fields": {
         "date": "2024-02-13T23:56:48Z",
         "task": 8,
-        "entry": "Potted up what I believe are broccoli and cauliflower. The labels got wet and smeared, so I don't know which is which, yet. Same issue with the cantaloupe."
+        "bed": null,
+        "note": "Potted up what I believe are broccoli and cauliflower. The labels got wet and smeared, so I don't know which is which, yet. Same issue with the cantaloupe.",
+        "image": "",
+        "image_desc": null
     }
 },
 {
@@ -3292,7 +3531,22 @@
     "fields": {
         "date": "2024-02-16T00:35:00Z",
         "task": 9,
-        "entry": "Finished re-arranging raised beds to two 3-bed rows with more space between them to allow easier access. Still need to put down bark chips on the pathways."
+        "bed": null,
+        "note": "Finished re-arranging raised beds to two 3-bed rows with more space between them to allow easier access. Still need to put down bark chips on the pathways.",
+        "image": "",
+        "image_desc": null
+    }
+},
+{
+    "model": "plants.journalentry",
+    "pk": 5,
+    "fields": {
+        "date": "2024-02-27T02:38:30Z",
+        "task": 8,
+        "bed": null,
+        "note": "Potted up Alvaro melons, all tomato varieties, cauliflower, and broccoli",
+        "image": "",
+        "image_desc": null
     }
 },
 {
@@ -3300,7 +3554,6 @@
     "pk": 1,
     "fields": {
         "task": "Start",
-        "freq": "",
         "note": "As needed"
     }
 },
@@ -3309,7 +3562,6 @@
     "pk": 2,
     "fields": {
         "task": "Plant",
-        "freq": "",
         "note": "As needed"
     }
 },
@@ -3318,7 +3570,6 @@
     "pk": 3,
     "fields": {
         "task": "Weed",
-        "freq": "RRULE:FREQ=DAILY;INTERVAL=3;UNTIL=20240831T070000Z",
         "note": "3 times/week"
     }
 },
@@ -3327,7 +3578,6 @@
     "pk": 4,
     "fields": {
         "task": "Water",
-        "freq": "RRULE:FREQ=WEEKLY;BYDAY=WE",
         "note": null
     }
 },
@@ -3336,7 +3586,6 @@
     "pk": 5,
     "fields": {
         "task": "Fertilize",
-        "freq": "RRULE:FREQ=MONTHLY;UNTIL=20240831T070000Z;BYMONTHDAY=1",
         "note": null
     }
 },
@@ -3345,7 +3594,6 @@
     "pk": 6,
     "fields": {
         "task": "Sucker",
-        "freq": "RRULE:FREQ=WEEKLY;BYDAY=TU",
         "note": null
     }
 },
@@ -3354,8 +3602,7 @@
     "pk": 7,
     "fields": {
         "task": "Deadhead",
-        "freq": "RRULE:FREQ=WEEKLY;BYDAY=MO,SA",
-        "note": null
+        "note": "Not the Grateful Dead kind, though"
     }
 },
 {
@@ -3363,7 +3610,6 @@
     "pk": 8,
     "fields": {
         "task": "Pot up",
-        "freq": null,
         "note": "As needed"
     }
 },
@@ -3372,8 +3618,15 @@
     "pk": 9,
     "fields": {
         "task": "Other",
-        "freq": null,
         "note": null
+    }
+},
+{
+    "model": "plants.task",
+    "pk": 10,
+    "fields": {
+        "task": "Pest check",
+        "note": "Note pest and damage"
     }
 }
 ]

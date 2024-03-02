@@ -4,7 +4,7 @@ from plants.models import Bed, JournalEntry, Plant, Planting, Task
 
 
 class JournalEntryAdmin(admin.ModelAdmin):
-    list_display = ["date", "task", "entry"]
+    list_display = ["date", "task", "note"]
 
 
 class PlantAdmin(admin.ModelAdmin):
@@ -16,7 +16,7 @@ class PlantingAdmin(admin.ModelAdmin):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ["task", "freq", "note"]
+    list_display = ["task", "note", "start", "end"]
 
 
 admin.site.register(Bed)
