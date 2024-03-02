@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
+
 from .models import Bed, JournalEntry, Plant, Planting, Task
 
 
@@ -20,14 +21,14 @@ def index(request):
     return render(request, 'plants/index.html', context={"views": views})
 
 
-class JournalEntryListView(ListView):
+class JournalNoteListView(ListView):
     model = JournalEntry
-    template_name = "plants/journalentry_list.html"
+    template_name = "plants/journal_note_list.html"
 
 
-class JournalEntryDetailView(DetailView):
+class JournalNoteDetailView(DetailView):
     model = JournalEntry
-    template_name = "plants/journalentry_detail.html"
+    template_name = "plants/journal_note_detail.html"
 
 
 class PlantListView(ListView):

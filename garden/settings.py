@@ -9,7 +9,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-INTERNAL_IPS = ["127.0.0.1",]
+INTERNAL_IPS = ["127.0.0.1", ]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -19,11 +19,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "plants.apps.PlantsConfig",
-    # Replacement ImageField
+    # Begin replacement ImageField
     "versatileimagefield",
-    # Calendaring/Reminders
-    "recurrence",
+    # End replacement ImageField
 ]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -33,7 +33,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
 
 ROOT_URLCONF = "garden.urls"
 
@@ -81,7 +80,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Los_Angeles"
 
 USE_I18N = True
 
