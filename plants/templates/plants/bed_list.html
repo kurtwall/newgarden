@@ -18,8 +18,8 @@
             {% for bed in bed_list %}
                 <div class="col gx-3 gy-3">
                     <div class="card h-100">
-                        <a href="{% url 'bed_detail' bed.bed %}"><img style="width: 100%"
-                            {% if bed.bed == 0 %}
+                        <a href="{% url 'bed_detail' bed.num %}"><img style="width: 100%"
+                            {% if bed.name == 0 %}
                                 src="{% static 'plants/seed_starts.jpg' %}"
                             {% elif bed.is_raised %}
                                 src="{% static 'plants/raised_bed.jpg' %}"
@@ -28,10 +28,10 @@
                             {% endif %}
                             class="card-img-top" alt="blah"></a>
                         <div class="card-body">
-                            {% if bed.bed == 0 %}
-                                <h5 class="card-title text-center">{{ bed.get_bed_display }}</h5>
+                            {% if bed.num == 0 %}
+                                <h5 class="card-title text-center">{{ bed.get_num_display }}</h5>
                             {% else %}
-                                <h5 class="card-title text-center">Bed {{ bed.get_bed_display }}</h5>
+                                <h5 class="card-title text-center">Bed {{ bed.get_num_display }}</h5>
                             {% endif %}
                         </div>
                     </div>

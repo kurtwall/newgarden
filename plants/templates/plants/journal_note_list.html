@@ -15,8 +15,8 @@
 
     <div class="container">
         <ul>
-            {% for entry in journalentry_list %}
-                <li><a href="{% url 'journalentry_detail' entry.pk %}">{{ entry.date | date:"Y-m-d" }}</a></li>
+            {% for note in journalnote_list %}
+                <li><a href="{% url 'journalentry_detail' note.pk %}">{{ note.date | date:"Y-m-d" }}</a></li>
             {% empty %}
                 <li>No journal entries have been created, yet.</li>
             {% endfor %}

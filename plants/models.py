@@ -28,7 +28,7 @@ class Plant(models.Model):
 
 class Bed(models.Model):
     class Meta:
-        ordering = ["bed"]
+        ordering = ["num"]
 
     CHOICES = [(1, "1"),
                (2, "2"),
@@ -41,7 +41,7 @@ class Bed(models.Model):
                (9, "9"),
                (0, "Starts")]
 
-    bed = models.SmallIntegerField(blank=False, null=False, verbose_name="bed number", choices=CHOICES)
+    num = models.SmallIntegerField(blank=False, null=False, verbose_name="bed number", choices=CHOICES)
     image = VersatileImageField(blank=True, null=True, width_field="img_width", height_field="img_height",
                                 verbose_name="current image")
     img_width = models.IntegerField(blank=True, null=True, verbose_name="image width")
@@ -49,7 +49,7 @@ class Bed(models.Model):
     is_raised = models.BooleanField(default=False, verbose_name="raised bed")
 
     def __str__(self):
-        return f"{self.bed}"
+        return f"{self.num}"
 
 
 class Planting(models.Model):
@@ -68,11 +68,11 @@ class Planting(models.Model):
         return f"{self.bed}"
 
 
-class JournalEntry(models.Model):
+class JournalNote(models.Model):
     class Meta:
         ordering = ["-date"]
-        verbose_name = "journal entry"
-        verbose_name_plural = "journal entries"
+        verbose_name = "journal note"
+        verbose_name_plural = "journal notes"
 
     date = models.DateTimeField(blank=False, null=False)
     task = models.ForeignKey("Task", blank=True, null=True, on_delete=models.PROTECT)
@@ -85,35 +85,24 @@ class JournalEntry(models.Model):
         return f"{self.date}"
 
     def get_queryset(self):
-        journalentry_list = JournalEntry.objects.order_by("date").filter(":5")
-        return journalentry_list
+        journalnote_list = JournalNote.objects.order_by("date").filter(":5")
+        return journalnote_list
 
 
-class Task(models.Model):  # s/Events/Task/
-    task = models.CharField(max_length=255, null=True, blank=True)  # s/name/task/
-    start = models.DateTimeField(null=True, blank=True)
-    end = models.DateTimeField(null=True, blank=True)
-    note = models.TextField(null=True, blank=True)  # s/note/description/
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class Task(models.Model):
+    INTERVALS = {"DAILY": "Daily",
+                 "WEEKLY": "Weekly",
+                 "MONTHLY": "Monthly",
+                 "YEARLY": "Yearly"}
+    task = models.CharField(max_length=255, null=False, blank=False)—
+    period = models.CharField(max_length=255, null=True, blank=True, choices=INTERVALS, verbose_name="period")
+    count = models.IntegerField(null=True, blank=True, default=0, verbose_name="iterations per period)")
+    start = models.DateField(null=True, blank=True)
+    end = models.DateField(null=True, blank=True)
+    note = models.TextField(null=True, blank=True)
 
     class Meta:
-        verbose_name = 'task'
-        verbose_name_plural = 'tasks'
-        ordering = ['task']
+        ordering = ["task"]
 
     def __str__(self):
         return f"{self.task}"
-
-
-class Events(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
-    start = models.DateTimeField(null=True, blank=True)
-    end = models.DateTimeField(null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'Calendar Events'
-        verbose_name_plural = 'Calendar Events'

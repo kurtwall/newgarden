@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from .models import Bed, JournalEntry, Plant, Planting, Task
+from .models import Bed, JournalNote, Plant, Planting, Task
+
+
+# The landing page
+def index(request):
+    views = ["beds", "plants", "tasks", "journal"]
+    return render(request, 'plants/index.html', context={"views": views})
 
 
 class BedListView(ListView):
@@ -9,25 +15,20 @@ class BedListView(ListView):
     template_name = "plants/bed_list.html"
 
 
-def bed_detail_view(request, bed):
-    plantings = Planting.objects.filter(bed__bed=bed)
-    is_raised = Bed.objects.get(bed=bed).is_raised
-    context = {'bed': bed, 'is_raised': is_raised, 'plantings': plantings}
+def bed_detail_view(request, num):
+    plantings = Planting.objects.filter(bed__num=num)
+    is_raised = Bed.objects.get(num=num).is_raised
+    context = {'num': num, 'is_raised': is_raised, 'plantings': plantings}
     return render(request, "plants/bed_detail.html", context=context)
 
 
-def index(request):
-    views = ["beds", "plants", "tasks", "journal"]
-    return render(request, 'plants/index.html', context={"views": views})
-
-
 class JournalNoteListView(ListView):
-    model = JournalEntry
+    model = JournalNote
     template_name = "plants/journal_note_list.html"
 
 
 class JournalNoteDetailView(DetailView):
-    model = JournalEntry
+    model = JournalNote
     template_name = "plants/journal_note_detail.html"
 
 
