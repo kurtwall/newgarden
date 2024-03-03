@@ -1,6 +1,7 @@
 from django.urls import path
 
 from plants import views
+from .views import calendar, add_event, update, remove, all_events
 
 urlpatterns = (([
     path("", views.index, name="index"),
@@ -12,4 +13,12 @@ urlpatterns = (([
     path("plants/<int:pk>/", views.PlantDetailView.as_view(), name="plant_detail"),
     path("tasks/", views.TaskListView.as_view(), name="task_list"),
     path("tasks/<int:pk>/", views.TaskDetailView.as_view(), name="task_detail"),
+    path('calendar/', calendar, name='calendar'),
+    path('add_event/', add_event, name='add_event'),
+    path('update/', update, name='update'),
+    path('remove/', remove, name='remove'),
+    path('all_events/', all_events, name='all_events'),
 ]))
+
+
+

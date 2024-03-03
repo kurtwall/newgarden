@@ -1,7 +1,8 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from .models import Bed, JournalNote, Plant, Planting, Task
+from .models import Bed, JournalNote, Plant, Planting, Task, Events
 
 
 # The landing page
@@ -53,3 +54,74 @@ class TaskListView(ListView):
 class TaskDetailView(DetailView):
     model = Task
     template_name = "plants/task_detail.html"
+
+
+# View functions for FullCalendar. These views link FullCalendar's
+# Javascript to Django's Python
+def calendar(request):
+    events = Task.objects.all()
+    context = {
+        "events": events.all()
+    }
+    return render(request, 'plants/calendar.html', context)
+
+
+# "Events" here are instances of the Task model. They default to "all-day"
+# durations
+def all_events(request):
+    all_events = Task.objects.all()
+    out = []
+    for event in all_events:
+        if event.start and event.end:
+            out.append({
+                'title': event.name,
+                'id': event.id,
+                'start': event.start,
+                'end': event.end,
+            })
+    return JsonResponse(out, safe=False)
+
+# def all_events(request):
+#     all_events = Events.objects.all()
+#     out = []
+#     for event in all_events:
+#         out.append({
+#             'title': event.name,
+#             'id': event.id,
+#             'start': event.start.strftime("%m/%d/%Y, %H:%M:%S"),
+#             'end': event.end.strftime("%m/%d/%Y, %H:%M:%S"),
+#         })
+#
+#     return JsonResponse(out, safe=False)
+
+
+def add_event(request):
+    start = request.GET.get("start", None)
+    end = request.GET.get("end", None)
+    title = request.GET.get("title", None)
+    event = Events(name=str(title), start=start, end=end)
+    event.save()
+    data = {}
+    return JsonResponse(data)
+
+
+def update(request):
+    start = request.GET.get("start", None)
+    end = request.GET.get("end", None)
+    title = request.GET.get("title", None)
+    id = request.GET.get("id", None)
+    event = Events.objects.get(id=id)
+    event.start = start
+    event.end = end
+    event.name = title
+    event.save()
+    data = {}
+    return JsonResponse(data)
+
+
+def remove(request):
+    id = request.GET.get("id", None)
+    event = Events.objects.get(id=id)
+    event.delete()
+    data = {}
+    return JsonResponse(data)

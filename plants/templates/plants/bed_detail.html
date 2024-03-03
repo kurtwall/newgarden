@@ -14,18 +14,25 @@
 {% endblock %}
 
 {% block content %}
+    {# jQuery and table sorting #}
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script src="https://rern.github.io/sortable/js/sortable.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#bed-table').sortable({});
+        });
+    </script>
 
     <div id="container">
-    
         <h1>
-            {% if bed == "0" %}
+            {% if num == "0" %}
                 Starts
             {% else %}
-                Bed {{ bed }} {% if is_raised %} (raised) {% else %} (not raised) {% endif %}
+                Bed {{ num }} {% if is_raised %} (raised) {% else %} (not raised) {% endif %}
             {% endif %}
         </h1>
         {% if plantings.count > 0 %}
-            <table class="table table-hover">
+            <table id="bed-table" class="table table-hover">
                 <thead>
                 <tr>
                     <th>Count</th>
@@ -46,7 +53,8 @@
                         <td>{{ planting.start_dt }}</td>
                         <td>{{ planting.plant_dt }}</td>
                         <td>{{ planting.harvest_dt }}</td>
-                        <td><img src="{{ planting.plant.image.thumbnail.100x100 }}" alt="thumbnail image of {{ planting.plant.name }}"></td>
+                        <td><img src="{{ planting.plant.image.thumbnail.100x100 }}"
+                                 alt="thumbnail image of {{ planting.plant.name }}"></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -54,7 +62,7 @@
         {% else %}
             <p>Nothing currently planted in this bed</p>
         {% endif %}
-    
+
     </div>
 
 {% endblock %}

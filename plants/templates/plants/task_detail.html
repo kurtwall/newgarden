@@ -13,13 +13,13 @@
 {% block content %}
 
     <div class="container">
-        <h1>{{ task.task }}</h1>
+        <h1>{{ task.name }}</h1>
         <ul>
             <li>Period: {{ task.get_period_display }}</li>
             <li>Iterations: {{ task.count }}</li>
             <li>Start: {{ task.start }}</li>
-            <li>End: {{ task.start }}</li>
-            <li>Note: {{ task.end }}</li>
+            <li>End: {{ task.end }}</li>
+            <li>Note: {{ task.note }}</li>
         </ul>
     </div>
 

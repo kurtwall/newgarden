@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from versatileimagefield.fields import VersatileImageField
 
 
@@ -24,6 +25,9 @@ class Plant(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.variety}"
+
+    def get_absolute_url(self):
+        return reverse("plant_detail", kwargs={"pk": self.pk})
 
 
 class Bed(models.Model):
@@ -51,6 +55,9 @@ class Bed(models.Model):
     def __str__(self):
         return f"{self.num}"
 
+    def get_absolute_url(self):
+        return reverse("bed_detail", kwargs={"pk": self.pk})
+
 
 class Planting(models.Model):
     class Meta:
@@ -66,6 +73,9 @@ class Planting(models.Model):
 
     def __str__(self):
         return f"{self.bed}"
+
+    def get_absolute_url(self):
+        return reverse("plant_detail", kwargs={"pk": self.pk})
 
 
 class JournalNote(models.Model):
@@ -84,6 +94,9 @@ class JournalNote(models.Model):
     def __str__(self):
         return f"{self.date}"
 
+    def get_absolute_url(self):
+        return reverse("journal_note_detail", kwargs={"pk": self.pk})
+
     def get_queryset(self):
         journalnote_list = JournalNote.objects.order_by("date").filter(":5")
         return journalnote_list
@@ -94,7 +107,7 @@ class Task(models.Model):
                  "WEEKLY": "Weekly",
                  "MONTHLY": "Monthly",
                  "YEARLY": "Yearly"}
-    task = models.CharField(max_length=255, null=False, blank=False)—
+    name = models.CharField(max_length=255, null=False, blank=False)
     period = models.CharField(max_length=255, null=True, blank=True, choices=INTERVALS, verbose_name="period")
     count = models.IntegerField(null=True, blank=True, default=0, verbose_name="iterations per period)")
     start = models.DateField(null=True, blank=True)
@@ -102,7 +115,24 @@ class Task(models.Model):
     note = models.TextField(null=True, blank=True)
 
     class Meta:
-        ordering = ["task"]
+        ordering = ["name"]
 
     def __str__(self):
-        return f"{self.task}"
+        return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse("task_detail", kwargs={"pk": self.pk})
+
+
+# FullCalendar
+class Events(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    start = models.DateField(null=True, blank=True)
+    end = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("event_detail", kwargs={"pk": self.pk})
