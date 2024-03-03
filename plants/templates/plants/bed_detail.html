@@ -14,14 +14,6 @@
 {% endblock %}
 
 {% block content %}
-    {# jQuery and table sorting #}
-    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-    <script src="https://rern.github.io/sortable/js/sortable.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#bed-table').sortable({});
-        });
-    </script>
 
     <div id="container">
         <h1>
@@ -32,7 +24,8 @@
             {% endif %}
         </h1>
         {% if plantings.count > 0 %}
-            <table id="bed-table" class="table table-hover">
+
+            <table id="bed-table" class="table table-hover tablesorter">
                 <thead>
                 <tr>
                     <th>Count</th>
@@ -62,7 +55,16 @@
         {% else %}
             <p>Nothing currently planted in this bed</p>
         {% endif %}
-
     </div>
 
+    {# Table sorting jquery pllugin #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" 
+            integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer"></script>
+    <script>
+        $(function() {
+            $('#bed-table').tablesorter();
+        });
+    </script>
 {% endblock %}
