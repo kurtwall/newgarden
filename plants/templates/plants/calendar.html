@@ -3,16 +3,6 @@
 
 {% block page_title %} Calendar {% endblock %}
 
-{% block navheader %}
-    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="{% url 'index' %}" class="nav-link px-2 text-primary">Home</a></li>
-        <li><a href="{% url 'bed_list' %}" class="nav-link px-2 text-primary">Beds</a></li>
-        <li><a href="{% url 'plant_list' %}" class="nav-link px-2 text-primary">Plants</a></li>
-        <li><a href="{% url 'task_list' %}" class="nav-link px-2 text-secondary">Calendar</a></li>
-        <li><a href="{% url 'journal_note_list' %}" class="nav-link px-2 text-primary">Journal</a></li>
-    </ul>
-{% endblock %}
-
 {% block content %}
 
     <script lang="javascript">
@@ -31,8 +21,8 @@
         <div class="col-2 px-3 py-3">
             <ul class="list-group">
                 {% for task in task_list %}
-                    <li class="list-group-item list-group-item-primary"><a
-                            href="{% url 'task_detail' task.pk %}">{{ task.name }}</a></li>
+                    {# <li class="list-group-item list-group-item-primary"><a href="{% url 'task_detail' task.pk %}">{{ task.name }}</a></li> #}
+                    <li class="list-group-item list-group-item-primary">{{ task.name }}</li>
                 {% empty %}
                     <li class="list-group-item list-group-item-warning">No tasks have been created, yet.</li>
                 {% endfor %}

@@ -3,16 +3,6 @@
 
 {% block page_title %} Flowers and Vegetables {% endblock %}
 
-{% block navheader %}
-    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="{% url 'index' %}" class="nav-link px-2 text-primary">Home</a></li>
-        <li><a href="{% url 'bed_list' %}" class="nav-link px-2 text-primary">Beds</a></li>
-        <li><a href="{% url 'plant_list' %}" class="nav-link px-2 text-secondary">Plants</a></li>
-        <li><a href="{% url 'task_list' %}" class="nav-link px-2 text-primary">Calendar</a></li>
-        <li><a href="{% url 'journal_note_list' %}" class="nav-link px-2 text-primary">Journal</a></li>
-    </ul>
-{% endblock %}
-
 {% block content %}
 
     <div class="container">

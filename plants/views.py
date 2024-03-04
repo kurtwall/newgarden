@@ -61,8 +61,10 @@ class TaskListView(ListView):
 # Javascript to Django's Python
 def calendar(request):
     events = Task.objects.all()
+    task_list = TaskListView.get_queryset(request)
     context = {
-        "events": events
+        "events": events,
+        "task_list": task_list
     }
     return render(request, 'plants/calendar.html', context)
 
