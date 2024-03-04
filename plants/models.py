@@ -103,16 +103,23 @@ class JournalNote(models.Model):
 
 
 class Task(models.Model):
-    INTERVALS = {"DAILY": "Daily",
-                 "WEEKLY": "Weekly",
-                 "MONTHLY": "Monthly",
-                 "YEARLY": "Yearly"}
-    name = models.CharField(max_length=255, null=False, blank=False)
-    period = models.CharField(max_length=255, null=True, blank=True, choices=INTERVALS, verbose_name="period")
-    count = models.IntegerField(null=True, blank=True, default=0, verbose_name="iterations per period)")
-    start = models.DateField(null=True, blank=True)
-    end = models.DateField(null=True, blank=True)
-    note = models.TextField(null=True, blank=True)
+    DAYS = {"0": "Sunday",
+            "1": "Moonday",
+            "2": "Tuesday",
+            "3": "Wednesday",
+            "4": "Thursday",
+            "5": "Friday",
+            "6": "Saturday"}
+    name = models.CharField(max_length=255, null=False, blank=False, verbose_name="task")
+    note = models.TextField(null=True, blank=True, verbose_name="comments")
+    # Singleton tasks
+    start = models.DateField(null=True, blank=True, verbose_name="start date")
+    end = models.DateField(null=True, blank=True, verbose_name="end date")
+    # Recurring tasks
+    is_recurring = models.BooleanField(default=True, verbose_name="repeating")
+    start_recur = models.DateField(null=True, blank=True, verbose_name="First occurrnce")
+    end_recur = models.DateField(null=True, blank=True, verbose_name="Last occurrence")
+    days_of_week = models.CharField(max_length=255, null=True, blank=True, choices=DAYS, verbose_name="day(s) of week")
 
     class Meta:
         ordering = ["name"]
@@ -122,17 +129,3 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         return reverse("task_detail", kwargs={"pk": self.pk})
-
-
-# FullCalendar
-class Events(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, null=True, blank=True)
-    start = models.DateField(null=True, blank=True)
-    end = models.DateField(null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse("event_detail", kwargs={"pk": self.pk})

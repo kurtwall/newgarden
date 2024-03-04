@@ -11,12 +11,12 @@ urlpatterns = (([
     path("journal/<int:pk>/", views.JournalNoteDetailView.as_view(), name="journalentry_detail"),
     path("plants/", views.PlantListView.as_view(), name="plant_list"),
     path("plants/<int:pk>/", views.PlantDetailView.as_view(), name="plant_detail"),
+    path('tasks/', calendar, name='calendar'),
     path("tasks/", views.TaskListView.as_view(), name="task_list"),
-    path("tasks/<int:pk>/", views.TaskDetailView.as_view(), name="task_detail"),
-    path('calendar/', calendar, name='calendar'),
-    path('add_event/', add_event, name='add_event'),
-    path('update/', update, name='update'),
-    path('remove/', remove, name='remove'),
+    # path("tasks/<int:pk>/", views.TaskDetailView.as_view(), name="task_detail"),
+    # path('add_event/', add_event, name='add_event'),
+    # path('update/', update, name='update'),
+    # path('remove/', remove, name='remove'),
     path('all_events/', all_events, name='all_events'),
 ]))
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from plants.models import Bed, Events, JournalNote, Plant, Planting, Task
+from plants.models import Bed, JournalNote, Plant, Planting, Task
 
 
 class JournalEntryAdmin(admin.ModelAdmin):
@@ -16,15 +16,10 @@ class PlantingAdmin(admin.ModelAdmin):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ["name", "period", "count", "note"]
-
-
-class EventsAdmin(admin.ModelAdmin):
-    list_display = ["name", "start", "end"]
+    list_display = ["name", "note", "start", "end", "is_recurring", "start_recur", "end_recur", "days_of_week"]
 
 
 admin.site.register(Bed)
-admin.site.register(Events, EventsAdmin)
 admin.site.register(JournalNote, JournalEntryAdmin)
 admin.site.register(Plant, PlantAdmin)
 admin.site.register(Planting, PlantingAdmin)

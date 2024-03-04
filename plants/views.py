@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from .models import Bed, JournalNote, Plant, Planting, Task, Events
+from .models import Bed, JournalNote, Plant, Planting, Task
 
 
 # The landing page
@@ -51,48 +51,49 @@ class TaskListView(ListView):
         return Task.objects.all()
 
 
-class TaskDetailView(DetailView):
-    model = Task
-    template_name = "plants/task_detail.html"
-
-
+# # TODO: This view might be unnecessary
+# class TaskDetailView(DetailView):
+#     model = Task
+#     template_name = "plants/task_detail.html"
+#
+#
 # View functions for FullCalendar. These views link FullCalendar's
 # Javascript to Django's Python
 def calendar(request):
     events = Task.objects.all()
     context = {
-        "events": events.all()
+        "events": events
     }
     return render(request, 'plants/calendar.html', context)
 
 
 # "Events" here are instances of the Task model. They default to "all-day"
-# durations
+# durations. The view maps the Django model data (say, event.days_of_week)
+# to the Javascript properties of the FullCalendar widget (daysOfWeek, in
+# this case). The widget is expecting certain property names, so populate
+# them from the queryset.
 def all_events(request):
     all_events = Task.objects.all()
     out = []
     for event in all_events:
-        if event.start and event.end:
+        if event.is_recurring:
             out.append({
                 'title': event.name,
                 'id': event.id,
+                'allDay': True,
+                'daysOfWeek': event.days_of_week,
+                'startRecur': event.start_recur,
+                'endRecur': event.end_recur
+            })
+        else:
+            out.append({
+                'title': event.name,
+                'id': event.id,
+                'allDay': True,
                 'start': event.start,
                 'end': event.end,
             })
     return JsonResponse(out, safe=False)
-
-# def all_events(request):
-#     all_events = Events.objects.all()
-#     out = []
-#     for event in all_events:
-#         out.append({
-#             'title': event.name,
-#             'id': event.id,
-#             'start': event.start.strftime("%m/%d/%Y, %H:%M:%S"),
-#             'end': event.end.strftime("%m/%d/%Y, %H:%M:%S"),
-#         })
-#
-#     return JsonResponse(out, safe=False)
 
 
 def add_event(request):
@@ -102,7 +103,7 @@ def add_event(request):
     event = Events(name=str(title), start=start, end=end)
     event.save()
     data = {}
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
 
 def update(request):
@@ -116,7 +117,7 @@ def update(request):
     event.name = title
     event.save()
     data = {}
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
 
 def remove(request):
@@ -124,4 +125,4 @@ def remove(request):
     event = Events.objects.get(id=id)
     event.delete()
     data = {}
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
