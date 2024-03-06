@@ -26,7 +26,6 @@ record events, notes, and activities about your garden in a journal.
 
 ## What is not working (in no particular order)
 
-- Make a calendar of garden events and tasks
 - Add, edit, delete journal notes
 - Add, edit, delete plants -- delete sets a deleted flag
 - Create daily/weekly worklists

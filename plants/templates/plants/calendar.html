@@ -1,35 +1,34 @@
-{% extends "plants/base.html" %}
+{% extends 'plants/base.html' %}
 {% load static %}
 
-{% block page_title %} Calendar {% endblock %}
+{% block page_title %} Task Calendar {% endblock %}
 
 {% block content %}
 
-    <script lang="javascript">
+    <script lang='javascript'>
         document.addEventListener('DOMContentLoaded', function () {
             let calendarEl = document.getElementById('calendar');
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 allDay: true,
-                events: '/all_events/'
+                events: '/all_events/',
+                eventClick: function (info) {
+                    alert('Event: ' + info.event.title
+                    + '\nCoordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY
+                    + '\nView: ' + info.view.type);
+                }
+
             });
             calendar.render();
         });
     </script>
 
-    <div class="row">
-        <div class="col-2 px-3 py-3">
-            <ul class="list-group">
-                {% for task in task_list %}
-                    {# <li class="list-group-item list-group-item-primary"><a href="{% url 'task_detail' task.pk %}">{{ task.name }}</a></li> #}
-                    <li class="list-group-item list-group-item-primary">{{ task.name }}</li>
-                {% empty %}
-                    <li class="list-group-item list-group-item-warning">No tasks have been created, yet.</li>
-                {% endfor %}
-            </ul>
+    <div class='row'>
+        <div class='col-1 px-3 py-3'>
+            <a href='{% url 'add_task' %}'>Add Task</a>
         </div>
-        <div class="col-10 px-3 py-3">
-            <div id="calendar"></div>
+        <div class='col-11 px-3 py-3'>
+            <div id='calendar'></div>
         </div>
     </div>
 

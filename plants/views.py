@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView,
 
 from .models import Bed, JournalNote, Plant, Planting, Task
 
@@ -51,12 +51,17 @@ class TaskListView(ListView):
         return Task.objects.all()
 
 
-# # TODO: This view might be unnecessary
-# class TaskDetailView(DetailView):
-#     model = Task
-#     template_name = "plants/task_detail.html"
-#
-#
+class AddTaskView(CreateView):
+    model = Task
+    template_name = "plants/add_task.html"
+    fields = ["name", "note", "start", "end", "is_recurring", "start_recur", "end_recur", "days_of_week"]
+
+
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = "plants/task_detail.html"
+
+
 # View functions for FullCalendar. These views link FullCalendar's
 # Javascript to Django's Python
 def calendar(request):
@@ -85,7 +90,7 @@ def all_events(request):
                 'allDay': True,
                 'daysOfWeek': event.days_of_week,
                 'startRecur': event.start_recur,
-                'endRecur': event.end_recur
+                'endRecur': event.end_recur,
             })
         else:
             out.append({
@@ -99,10 +104,16 @@ def all_events(request):
 
 
 def add_event(request):
+    name = request.GET.get("name", None)
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
-    title = request.GET.get("title", None)
-    event = Events(name=str(title), start=start, end=end)
+    all_day = request.GET.get("allDay", True)
+    is_recurring = request.GET.get("isRecurring")
+    days_of_week = request.GET.get("daysOfWeek", None)
+    start_recur = request.GET.get("startRecur", None)
+    end_recur = request.GET.get("endRecur", None)
+    event = Task(name=str(name), start=start, end=end, all_day=all_day, is_recurring=is_recurring,
+                 days_of_week=days_of_week, start_recur=start_recur, end_recur=end_recur)
     event.save()
     data = {}
     return JsonResponse(data, safe=False)
@@ -113,7 +124,7 @@ def update(request):
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
     id = request.GET.get("id", None)
-    event = Events.objects.get(id=id)
+    event = Task.objects.get(id=id)
     event.start = start
     event.end = end
     event.name = title
@@ -124,7 +135,7 @@ def update(request):
 
 def remove(request):
     id = request.GET.get("id", None)
-    event = Events.objects.get(id=id)
+    event = Task.objects.get(id=id)
     event.delete()
     data = {}
     return JsonResponse(data, safe=False)

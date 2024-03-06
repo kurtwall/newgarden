@@ -3,13 +3,17 @@
 {% block content %}
 
     <div class="container">
-        <h1>{{ task.name }}</h1>
+        <h1 class="text-center">{{ task.name }}</h1>
         <ul>
-            <li>Period: {{ task.get_period_display }}</li>
-            <li>Iterations: {{ task.count }}</li>
-            <li>Start: {{ task.start }}</li>
-            <li>End: {{ task.end }}</li>
             <li>Note: {{ task.note }}</li>
+            {% if task.is_recurring %}
+                <li>Start: {{ task.start_recur }}</li>
+                <li>End: {{ task.end_recur }}</li>
+                <li>Days of week: {{ task.days_of_week }}
+            {% else %}
+                <li>Start: {{ task.start }}</li>
+                <li>End: {{ task.end }}</li>
+            {% endif %}
         </ul>
     </div>
 

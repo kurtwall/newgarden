@@ -43,7 +43,7 @@ class Bed(models.Model):
                (7, "7"),
                (8, "8"),
                (9, "9"),
-               (0, "Starts")]
+               (0, "Starts"),]
 
     num = models.SmallIntegerField(blank=False, null=False, verbose_name="bed number", choices=CHOICES)
     image = VersatileImageField(blank=True, null=True, width_field="img_width", height_field="img_height",
@@ -98,13 +98,13 @@ class JournalNote(models.Model):
         return reverse("journal_note_detail", kwargs={"pk": self.pk})
 
     def get_queryset(self):
-        journalnote_list = JournalNote.objects.order_by("date").filter(":5")
+        journalnote_list = JournalNote.objects.all()
         return journalnote_list
 
 
 class Task(models.Model):
     DAYS = {"0": "Sunday",
-            "1": "Moonday",
+            "1": "Monday",
             "2": "Tuesday",
             "3": "Wednesday",
             "4": "Thursday",
@@ -117,7 +117,7 @@ class Task(models.Model):
     end = models.DateField(null=True, blank=True, verbose_name="end date")
     # Recurring tasks
     is_recurring = models.BooleanField(default=True, verbose_name="repeating")
-    start_recur = models.DateField(null=True, blank=True, verbose_name="First occurrnce")
+    start_recur = models.DateField(null=True, blank=True, verbose_name="First occurrence")
     end_recur = models.DateField(null=True, blank=True, verbose_name="Last occurrence")
     days_of_week = models.CharField(max_length=255, null=True, blank=True, choices=DAYS, verbose_name="day(s) of week")
 
