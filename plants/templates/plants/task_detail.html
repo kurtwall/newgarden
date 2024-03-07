@@ -4,16 +4,19 @@
 
     <div class="container">
         <h1 class="text-center">{{ task.name }}</h1>
-        <ul>
-            <li>Note: {{ task.note }}</li>
+        {% if task.is_recurring %}
+            <p class="text-center text-sm">(recurring task)</p>
+        {% endif %}
+        <ul class="list-group">
             {% if task.is_recurring %}
-                <li>Start: {{ task.start_recur }}</li>
-                <li>End: {{ task.end_recur }}</li>
-                <li>Days of week: {{ task.days_of_week }}
+                <li class="list-group-item">Start: {{ task.start_recur }}</li>
+                <li class="list-group-item">End: {{ task.end_recur }}</li>
+                <li class="list-group-item">Days of week: {{ task.days_of_week }}</li>
             {% else %}
-                <li>Start: {{ task.start }}</li>
-                <li>End: {{ task.end }}</li>
+                <li class="list-group-item">Start: {{ task.start }}</li>
+                <li class="list-group-item">End: {{ task.end }}</li>
             {% endif %}
+            <li class="list-group-item">Note: {{ task.note }}</li>
         </ul>
     </div>
 

@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView, ListView,
+from django.views.generic import DetailView, ListView
 
-from .models import Bed, JournalNote, Plant, Planting, Task
+from plants.models import Bed, JournalNote, Plant, Planting, Task
 
 
 # The landing page
@@ -51,12 +51,6 @@ class TaskListView(ListView):
         return Task.objects.all()
 
 
-class AddTaskView(CreateView):
-    model = Task
-    template_name = "plants/add_task.html"
-    fields = ["name", "note", "start", "end", "is_recurring", "start_recur", "end_recur", "days_of_week"]
-
-
 class TaskDetailView(DetailView):
     model = Task
     template_name = "plants/task_detail.html"
@@ -91,6 +85,7 @@ def all_events(request):
                 'daysOfWeek': event.days_of_week,
                 'startRecur': event.start_recur,
                 'endRecur': event.end_recur,
+                'url': event.get_absolute_url(),
             })
         else:
             out.append({
@@ -99,6 +94,7 @@ def all_events(request):
                 'allDay': True,
                 'start': event.start,
                 'end': event.end,
+                'url': event.get_absolute_url(),
             })
     return JsonResponse(out, safe=False)
 
@@ -107,12 +103,11 @@ def add_event(request):
     name = request.GET.get("name", None)
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
-    all_day = request.GET.get("allDay", True)
     is_recurring = request.GET.get("isRecurring")
     days_of_week = request.GET.get("daysOfWeek", None)
     start_recur = request.GET.get("startRecur", None)
     end_recur = request.GET.get("endRecur", None)
-    event = Task(name=str(name), start=start, end=end, all_day=all_day, is_recurring=is_recurring,
+    event = Task(name=str(name), start=start, end=end, is_recurring=is_recurring,
                  days_of_week=days_of_week, start_recur=start_recur, end_recur=end_recur)
     event.save()
     data = {}

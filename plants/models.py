@@ -98,7 +98,7 @@ class JournalNote(models.Model):
         return reverse("journal_note_detail", kwargs={"pk": self.pk})
 
     def get_queryset(self):
-        journalnote_list = JournalNote.objects.all()
+        journalnote_list = JournalNote.objects.all()[:5]
         return journalnote_list
 
 
@@ -117,8 +117,8 @@ class Task(models.Model):
     end = models.DateField(null=True, blank=True, verbose_name="end date")
     # Recurring tasks
     is_recurring = models.BooleanField(default=True, verbose_name="repeating")
-    start_recur = models.DateField(null=True, blank=True, verbose_name="First occurrence")
-    end_recur = models.DateField(null=True, blank=True, verbose_name="Last occurrence")
+    start_recur = models.DateField(null=True, blank=True, verbose_name="first occurrence")
+    end_recur = models.DateField(null=True, blank=True, verbose_name="last occurrence")
     days_of_week = models.CharField(max_length=255, null=True, blank=True, choices=DAYS, verbose_name="day(s) of week")
 
     class Meta:
