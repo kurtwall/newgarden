@@ -43,7 +43,7 @@ class Bed(models.Model):
                (7, "7"),
                (8, "8"),
                (9, "9"),
-               (0, "Starts"),]
+               (0, "Starts"), ]
 
     num = models.SmallIntegerField(blank=False, null=False, verbose_name="bed number", choices=CHOICES)
     image = VersatileImageField(blank=True, null=True, width_field="img_width", height_field="img_height",
@@ -56,7 +56,8 @@ class Bed(models.Model):
         return f"{self.num}"
 
     def get_absolute_url(self):
-        return reverse("bed_detail", kwargs={"pk": self.pk})
+        # return reverse("bed_detail", kwargs={"pk": self.pk})
+        return reverse("bed_detail", kwargs={"num": self.num})
 
 
 class Planting(models.Model):
@@ -103,14 +104,16 @@ class JournalNote(models.Model):
 
 
 class Task(models.Model):
-    DAYS = {"0": "Sunday",
-            "1": "Monday",
-            "2": "Tuesday",
-            "3": "Wednesday",
-            "4": "Thursday",
-            "5": "Friday",
-            "6": "Saturday"}
-    name = models.CharField(max_length=255, null=False, blank=False, verbose_name="task")
+    class Days(models.IntegerChoices):
+        SUNDAY = 0
+        MONDAY = 1
+        TUESDAY = 2
+        WEDNESDAY = 3
+        THURSDAY = 4
+        FRIDAY = 5
+        SATURDAY = 6
+
+    name = models.CharField(max_length=255, null=False, blank=False, verbose_name="task/chore")
     note = models.TextField(null=True, blank=True, verbose_name="comments")
     # Singleton tasks
     start = models.DateField(null=True, blank=True, verbose_name="start date")
@@ -119,7 +122,7 @@ class Task(models.Model):
     is_recurring = models.BooleanField(default=True, verbose_name="repeating")
     start_recur = models.DateField(null=True, blank=True, verbose_name="first occurrence")
     end_recur = models.DateField(null=True, blank=True, verbose_name="last occurrence")
-    days_of_week = models.CharField(max_length=255, null=True, blank=True, choices=DAYS, verbose_name="day(s) of week")
+    days_of_week = models.CharField(max_length=15, null=True, blank=True, choices=Days, verbose_name="day(s) of week")
 
     class Meta:
         ordering = ["name"]

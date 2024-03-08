@@ -11,7 +11,7 @@
                 <div class="col gx-3 gy-3">
                     <div class="card h-100">
                         <a href="{% url 'bed_detail' bed.num %}"><img style="width: 100%"
-                            {% if bed.name == 0 %}
+                            {% if bed.num == 0 %}
                                 src="{% static 'plants/seed_starts.jpg' %}"
                             {% elif bed.is_raised %}
                                 src="{% static 'plants/raised_bed.jpg' %}"

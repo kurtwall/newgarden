@@ -43,67 +43,57 @@ class PlantDetailView(DetailView):
     template_name = "plants/plant_detail.html"
 
 
-class TaskListView(ListView):
-    model = Task
-    template_name = "plants/task_list.html"
-
-    def get_queryset(self):
-        return Task.objects.all()
-
-
 class TaskDetailView(DetailView):
     model = Task
     template_name = "plants/task_detail.html"
 
 
-# View functions for FullCalendar. These views link FullCalendar's
-# Javascript to Django's Python
+# View functions for FullCalendar. These views link FullCalendar's Javascript to Django's Python. FullCalendar's Event
+# object maps roughly to the Task model, so an "event" is a "task". The view maps the Django model data (say, task.name)
+# to the Javascript properties of the FullCalendar widget (event.title, in this case).
 def calendar(request):
     events = Task.objects.all()
-    task_list = TaskListView.get_queryset(request)
     context = {
         "events": events,
-        "task_list": task_list
     }
     return render(request, 'plants/calendar.html', context)
 
 
-# "Events" here are instances of the Task model. They default to "all-day"
-# durations. The view maps the Django model data (say, event.days_of_week)
-# to the Javascript properties of the FullCalendar widget (daysOfWeek, in
-# this case). The widget is expecting certain property names, so populate
+# The calendar widget expects certain options and property names, so populate
 # them from the queryset.
 def all_events(request):
-    all_events = Task.objects.all()
+    tasks = Task.objects.all()
     out = []
-    for event in all_events:
-        if event.is_recurring:
+    for task in tasks:
+        if task.is_recurring:
             out.append({
-                'title': event.name,
-                'id': event.id,
+                'title': task.name,
+                'id': task.id,
                 'allDay': True,
-                'daysOfWeek': event.days_of_week,
-                'startRecur': event.start_recur,
-                'endRecur': event.end_recur,
-                'url': event.get_absolute_url(),
+                'daysOfWeek': task.days_of_week,
+                'startRecur': task.start_recur,
+                'endRecur': task.end_recur,
+                'url': task.get_absolute_url(),
+                'extendedProps': {},
             })
         else:
             out.append({
-                'title': event.name,
-                'id': event.id,
+                'title': task.name,
+                'id': task.id,
                 'allDay': True,
-                'start': event.start,
-                'end': event.end,
-                'url': event.get_absolute_url(),
+                'start': task.start,
+                'end': task.end,
+                'url': task.get_absolute_url(),
+                'extendedProps': {},
             })
     return JsonResponse(out, safe=False)
 
 
 def add_event(request):
     name = request.GET.get("name", None)
+    is_recurring = request.GET.get("isRecurring")
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
-    is_recurring = request.GET.get("isRecurring")
     days_of_week = request.GET.get("daysOfWeek", None)
     start_recur = request.GET.get("startRecur", None)
     end_recur = request.GET.get("endRecur", None)
@@ -114,7 +104,7 @@ def add_event(request):
     return JsonResponse(data, safe=False)
 
 
-def update(request):
+def update_event(request):
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
@@ -128,9 +118,9 @@ def update(request):
     return JsonResponse(data, safe=False)
 
 
-def remove(request):
+def remove_event(request):
     id = request.GET.get("id", None)
-    event = Task.objects.get(id=id)
-    event.delete()
+    task = Task.objects.get(id=id)
+    task.delete()
     data = {}
     return JsonResponse(data, safe=False)
