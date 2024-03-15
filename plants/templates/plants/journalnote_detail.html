@@ -1,4 +1,5 @@
 {% extends 'plants/base.html' %}
+{% load static %}
 
 {% block page_title %} Journal Note {% endblock %}
 
@@ -7,7 +8,7 @@
     <div class="container">
         <h1>Journal</h1>
         <ul class="list-group">
-            <li class="list-group-item">{{ journalnote.date }}</li>
+            <li class="list-group-item">{{ journalnote.date | date:"Y-m-d" }}</li>
             <li class="list-group-item">{{ journalnote.task }}</li>
             <li class="list-group-item">{{ journalnote.note }}</li>
         </ul>

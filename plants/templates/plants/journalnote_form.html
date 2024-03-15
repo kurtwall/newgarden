@@ -1,0 +1,11 @@
+{% extends 'plants/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <form action="/journal/add/" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

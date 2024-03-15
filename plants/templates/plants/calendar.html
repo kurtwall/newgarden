@@ -24,9 +24,14 @@
     </script>
 
     <div class='row'>
-        <div class='col-11 px-3 py-3'>
+        <div class='col-10 px-3 py-3'>
             <div id='calendar'></div>
         </div>
+        <div class='col-2 px-3 py-3'>
+            <a href="{% url 'task_add' %}" class="btn btn-primary" role="button">Add Task</a>
+        </div>
+    </div>
+
     </div>
 
 {% endblock %}

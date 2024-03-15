@@ -19,5 +19,6 @@
             <li class="list-group-item">Note: {{ task.note }}</li>
         </ul>
     </div>
+    <a href="{% url 'task_edit' task.pk %}" class="btn btn-primary">Edit Task</a>
 
 {% endblock %}

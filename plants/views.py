@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from plants.models import Bed, JournalNote, Plant, Planting, Task
 
@@ -25,17 +27,32 @@ def bed_detail_view(request, num):
 
 class JournalNoteListView(ListView):
     model = JournalNote
-    template_name = "plants/journal_note_list.html"
+    template_name = "plants/journalnote_list.html"
 
 
 class JournalNoteDetailView(DetailView):
     model = JournalNote
-    template_name = "plants/journal_note_detail.html"
+    template_name = "plants/journalnote_detail.html"
 
 
 class PlantListView(ListView):
     model = Plant
     template_name = "plants/plant_list.html"
+
+
+class JournalCreateNoteView(CreateView):
+    model = JournalNote
+    fields = ["date", "task", "bed", "note", "image", "image_desc"]
+
+
+class JournalUpdateNoteView(UpdateView):
+    model = JournalNote
+    fields = ["date", "task", "bed", "note", "image", "image_desc"]
+
+
+class JournalDeleteNoteView(DeleteView):
+    model = JournalNote
+    success_url = reverse_lazy("journalnote_list")
 
 
 class PlantDetailView(DetailView):
@@ -48,8 +65,23 @@ class TaskDetailView(DetailView):
     template_name = "plants/task_detail.html"
 
 
-class AddTaskView():
-    pass
+class TaskCreateView(CreateView):
+    model = Task
+    fields = ["name", "note", "start", "end", "is_recurring", "start_recur", "end_recur", "days_of_week",
+              "is_completed"]
+    template_name = "plants/task_form.html"
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    fields = ["name", "note", "start", "end", "is_recurring", "start_recur", "end_recur", "days_of_week",
+              "is_completed"]
+    template_name = "plants/task_form.html"
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    success_url = reverse_lazy("all_events")
 
 
 # View functions for FullCalendar. These views link FullCalendar's Javascript to Django's Python. FullCalendar's Event
@@ -77,8 +109,7 @@ def all_events(request):
                 'daysOfWeek': task.days_of_week,
                 'startRecur': task.start_recur,
                 'endRecur': task.end_recur,
-                'url': task.get_absolute_url(),
-                'extendedProps': {'fooproperty': 'barvalue'},
+                'url': task.get_absolute_url()
             })
         else:
             out.append({
@@ -87,45 +118,6 @@ def all_events(request):
                 'allDay': True,
                 'start': task.start,
                 'end': task.end,
-                'url': task.get_absolute_url(),
-                'extendedProps': {'fooproperty': 'barvalue'},
+                'url': task.get_absolute_url()
             })
     return JsonResponse(out, safe=False)
-
-
-def add_event(request):
-    name = request.GET.get("name", None)
-    is_recurring = request.GET.get("isRecurring")
-    start = request.GET.get("start", None)
-    end = request.GET.get("end", None)
-    days_of_week = request.GET.get("daysOfWeek", None)
-    start_recur = request.GET.get("startRecur", None)
-    end_recur = request.GET.get("endRecur", None)
-    all_day = True
-    event = Task(name=str(name), start=start, end=end, allDay = all_day, is_recurring=is_recurring,
-                 days_of_week=days_of_week, start_recur=start_recur, end_recur=end_recur)
-    event.save()
-    data = {}
-    return JsonResponse(data, safe=False)
-
-
-def update_event(request):
-    start = request.GET.get("start", None)
-    end = request.GET.get("end", None)
-    title = request.GET.get("title", None)
-    id = request.GET.get("id", None)
-    event = Task.objects.get(id=id)
-    event.start = start
-    event.end = end
-    event.name = title
-    event.save()
-    data = {}
-    return JsonResponse(data, safe=False)
-
-
-def remove_event(request):
-    id = request.GET.get("id", None)
-    task = Task.objects.get(id=id)
-    task.delete()
-    data = {}
-    return JsonResponse(data, safe=False)

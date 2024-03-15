@@ -1,0 +1,25 @@
+{% extends 'plants/base.html' %}
+{% load static %}
+
+{% block page_title %} Journal Notes {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class='col-10 px-3 py-3'>
+            <ul class="list-group">
+                {% for note in journalnote_list %}
+                    <li class="list-group-item list-group-item-primary">
+                        <a href="{% url 'journalnote_detail' note.pk %}">{{ note.date | date:"Y-m-d" }}</a><br>{{ note.note | truncatewords:10 }}
+                    </li>
+                {% empty %}
+                    <li class="list-group-item list-group-item-warning">No journal entries have been created, yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-2 px-3 py-3">
+            <a href="{% url 'journalnote_create' %}" class="btn btn-primary">Add journal entry</a>
+        </div>
+    </div>
+    
+{% endblock %}

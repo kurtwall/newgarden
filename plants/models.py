@@ -96,7 +96,7 @@ class JournalNote(models.Model):
         return f"{self.date}"
 
     def get_absolute_url(self):
-        return reverse("journal_note_detail", kwargs={"pk": self.pk})
+        return reverse("journalnote_detail", kwargs={"pk": self.pk})
 
     def get_queryset(self):
         journalnote_list = JournalNote.objects.all()[:5]
