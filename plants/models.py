@@ -123,6 +123,7 @@ class Task(models.Model):
     start_recur = models.DateField(null=True, blank=True, verbose_name="first occurrence")
     end_recur = models.DateField(null=True, blank=True, verbose_name="last occurrence")
     days_of_week = models.CharField(max_length=15, null=True, blank=True, choices=Days, verbose_name="day(s) of week")
+    is_completed = models.BooleanField(default=False, verbose_name="is complete")
 
     class Meta:
         ordering = ["name"]

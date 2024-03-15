@@ -17,8 +17,8 @@
                                 <a href="{% url 'bed_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of a raised bed" src="{% static 'plants/raised_bed.jpg' %}"></a>
                             {% elif view.title|lower == "plants" %}
                                 <a href="{% url 'plant_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of various vegetables" src="{% static 'plants/vegetables.jpg' %}"></a>
-                            {% elif view.title|lower == "tasks" %}
-                                <a href="{% url 'calendar' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of gardening chores" src="{% static 'plants/tasks.jpg' %}"></a>
+                            {% elif view.title|lower == "calendar" %}
+                                <a href="{% url 'calendar' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of gardening tools" src="{% static 'plants/tasks.jpg' %}"></a>
                             {% elif view.title|lower == "journal" %}
                                 <a href="{% url 'journal_note_list' %}"><img class="card-img-top px-2 py-2" width="100%" height="225" alt="clipart image of a gardening journal" src="{% static 'plants/journal.jpg' %}"></a>
                             {% endif %}

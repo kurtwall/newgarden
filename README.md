@@ -40,4 +40,5 @@ record events, notes, and activities about your garden in a journal.
 - [General styling](https://getbootstrap.com)
 - [Table styling](git@github.com:jieter/django-tables2.git)
 - Replace stock bed images with actual images
-- 
+- Support rendered markup where sensible (descriptions, comments, notes, etc)
+- Add Farmer's Almanac link to tasks for 2024, where I'm trying to follow their _Gardening by the Moon_ schedule.

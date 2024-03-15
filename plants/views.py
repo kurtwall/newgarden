@@ -7,7 +7,7 @@ from plants.models import Bed, JournalNote, Plant, Planting, Task
 
 # The landing page
 def index(request):
-    views = ["beds", "plants", "tasks", "journal"]
+    views = ["beds", "plants", "calendar", "journal"]
     return render(request, 'plants/index.html', context={"views": views})
 
 
@@ -48,6 +48,10 @@ class TaskDetailView(DetailView):
     template_name = "plants/task_detail.html"
 
 
+class AddTaskView():
+    pass
+
+
 # View functions for FullCalendar. These views link FullCalendar's Javascript to Django's Python. FullCalendar's Event
 # object maps roughly to the Task model, so an "event" is a "task". The view maps the Django model data (say, task.name)
 # to the Javascript properties of the FullCalendar widget (event.title, in this case).
@@ -74,7 +78,7 @@ def all_events(request):
                 'startRecur': task.start_recur,
                 'endRecur': task.end_recur,
                 'url': task.get_absolute_url(),
-                'extendedProps': {},
+                'extendedProps': {'fooproperty': 'barvalue'},
             })
         else:
             out.append({
@@ -84,7 +88,7 @@ def all_events(request):
                 'start': task.start,
                 'end': task.end,
                 'url': task.get_absolute_url(),
-                'extendedProps': {},
+                'extendedProps': {'fooproperty': 'barvalue'},
             })
     return JsonResponse(out, safe=False)
 
@@ -97,7 +101,8 @@ def add_event(request):
     days_of_week = request.GET.get("daysOfWeek", None)
     start_recur = request.GET.get("startRecur", None)
     end_recur = request.GET.get("endRecur", None)
-    event = Task(name=str(name), start=start, end=end, is_recurring=is_recurring,
+    all_day = True
+    event = Task(name=str(name), start=start, end=end, allDay = all_day, is_recurring=is_recurring,
                  days_of_week=days_of_week, start_recur=start_recur, end_recur=end_recur)
     event.save()
     data = {}
